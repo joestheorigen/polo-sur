@@ -14,6 +14,6 @@ import java.util.ArrayList;
  */
 public class polo_Sur {
     
-    ArrayList<serVivo> animales = new ArrayList<SerVivo>();
+    ArrayList<serVivo> animales = new ArrayList<serVivo>();
     
 }
