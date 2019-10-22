@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package polo.sur;
+
 
 /**
  *
@@ -15,7 +15,7 @@ public class polo_Sur {
     ArrayList<oso> osos = new ArrayList<oso>();
     ArrayList<morsas> morsa = new ArrayList<morsa>();
     ArrayList<pez> peces = new ArrayList<pez>();
-    ArrayList<> esquemales = new ArrayList<esquimales>();
+    ArrayList<> kyp = new ArrayList<kyp>();
     
     
     
