@@ -17,6 +17,12 @@ public class serVivo {
     double probReproducirse;
     double probMuerte;
     
+       public serVivo(LocalDate fechaN, double masaM, double probRepro, double probM ){
+           fechaNacimiento = fechaN;
+           masaMuscular = 
+        
+    }
+ 
     public boolean muerteInadicion(){
         
     }
