@@ -8,6 +8,6 @@
  *
  * @author joest
  */
-public class esquimales {
+public class morsa extends serVivo{
     
 }
