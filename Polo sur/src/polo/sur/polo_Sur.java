@@ -10,10 +10,13 @@ package polo.sur;
  * @author joest
  */
 public class polo_Sur {
-   
-    /*ArrayList<esquimal> esquemales = new ArrayList<esquimales>();
+    
+    ArrayList<esquimal> esquemales = new ArrayList<esquimales>();
     ArrayList<oso> osos = new ArrayList<oso>();
     ArrayList<morsas> morsa = new ArrayList<morsa>();
     ArrayList<pez> peces = new ArrayList<pez>();
-    ArrayList<> esquemales = new ArrayList<esquimales>();*/
+    ArrayList<> esquemales = new ArrayList<esquimales>();
+    
+    
+    
 }

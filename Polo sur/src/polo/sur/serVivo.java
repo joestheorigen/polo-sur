@@ -5,10 +5,28 @@
  */
 package polo.sur;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author joest
  */
 public class serVivo {
+    LocalDate fechaNacimiento;
+    double masaMuscular;
+    double probReproducirse;
+    double probMuerte;
+    
+    public boolean muerteInadicion(){
+        
+    }
+    
+    public boolean muerteInesperada(){
+        
+    }
+    
+    public boolean reproducirse(){
+        
+    }
     
 }
