@@ -12,15 +12,15 @@ import java.time.LocalDate;
  */
 public class serVivo {
 
-    LocalDate fechaNacimiento;
+    int dia;
     double masaMuscular;
     double probReproducirse;
     double probMuerte;
     int comidaNecesaria;
     double random;
 
-    public serVivo(LocalDate fechaN, double masaM, double probRepro, double probM, int comidaN) {
-        fechaNacimiento = fechaN;
+    public serVivo(int dia, double masaM, double probRepro, double probM, int comidaN) {
+        this.dia = dia;
         masaMuscular = masaM;
         probReproducirse = probRepro;
         probMuerte = probM;
