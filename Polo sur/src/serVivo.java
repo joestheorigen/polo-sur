@@ -1,10 +1,11 @@
+
+import java.util.Random;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import java.time.LocalDate;
 
 /**
  *
@@ -13,24 +14,23 @@ import java.time.LocalDate;
 public class serVivo {
 
     int dia;
-    double masaMuscular;
-    double probReproducirse;
-    double probMuerte;
+    int masaMuscular;
+    float probReproducirse;
+    float probMuerte;
     int comidaNecesaria;
-    double random;
+    String raza;
+    Random random;
 
-    public serVivo(int dia, double masaM, double probRepro, double probM, int comidaN) {
+    public serVivo(int dia, int masaM, float probRepro, float probM, String raza) {
         this.dia = dia;
         masaMuscular = masaM;
         probReproducirse = probRepro;
         probMuerte = probM;
-        comidaNecesaria = comidaN;
-
+        this.raza=raza;
     }
 
     public boolean muerteInesperada() {
-        random = Math.random() * 1000;
-        if (random <= probMuerte) {
+        if (random.nextFloat() <= probMuerte) {
             return true;
         } else {
             return false;
@@ -38,12 +38,10 @@ public class serVivo {
     }
 
     public boolean reproducirse() {
-        random = Math.random() * 1000;
-        if (random <= probReproducirse) {
+        if (random.nextFloat() <= probReproducirse) {
             return true;
         } else {
             return false;
         }
     }
-
 }
