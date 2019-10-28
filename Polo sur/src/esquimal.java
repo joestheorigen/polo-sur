@@ -39,4 +39,7 @@ public class esquimal extends serVivo{
                 return 1;
             }
     }
+    public String toString(){
+        return "raza esquimal nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
+    }
 }

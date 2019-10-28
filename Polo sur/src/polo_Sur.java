@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,9 +18,9 @@ public class polo_Sur {
     ArrayList<serVivo> animales = new ArrayList<serVivo>();
     double temperatura = 4;
     int dia;
-    
-    public void creaNuestroPolo() {
-        dia=1;
+
+    public polo_Sur() {
+        dia = 0;
         crearEsquimales();
         crearOsos();
         crearMorsas();
@@ -26,17 +28,28 @@ public class polo_Sur {
         crearPeces();
         crearkyp();
     }
-    
-    public void diaAdia(){
+
+    public void diaAdia() {
+        dia++;
         cambiarTemperatura();
         comer();
         reproducir();
         muerteInesperada();
-        if(mundoMuerto()){
-            
+    }
+
+    public void pasar10dias() {
+        for (int i = 0; i < 10; i++) {
+            dia++;
+            cambiarTemperatura();
+            comer();
+            reproducir();
+            muerteInesperada();
+            if (mundoMuerto()) {
+                JOptionPane.showMessageDialog(new JFrame(), "El mundo esta muerto en el dia" + dia);
+            }
         }
     }
-    
+
     public void crearEsquimales() {
         int n, i, masa;                                            //en n ira el numero de esquimales que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (14 - 12 + 1) + 12);          //i es solo para explorar el for
@@ -123,58 +136,65 @@ public class polo_Sur {
                 case "esquimal":
                     if (i.reproducirse()) {
                         animales.add(new esquimal(dia, i.masaMuscular, 32 / 1000, 24 / 1000));
-                    }break;
+                    }
+                    break;
                 case "oso":
                     if (i.reproducirse()) {
                         animales.add(new oso(dia, i.masaMuscular, 153 / 1000, 95 / 1000));
-                    }break;
+                    }
+                    break;
                 case "morsa":
                     if (i.reproducirse()) {
                         animales.add(new morsa(dia, i.masaMuscular, 98 / 1000, 95 / 1000));
-                    }break;
+                    }
+                    break;
                 case "foca":
                     if (i.reproducirse()) {
                         animales.add(new foca(dia, i.masaMuscular, 100 / 1000, 90 / 1000));
-                    }break;
+                    }
+                    break;
                 case "bacalao":
                     if (i.reproducirse()) {
                         animales.add(new pez(dia, i.masaMuscular, 185 / 1000, 163 / 1000, "bacalao"));
-                    }break;
+                    }
+                    break;
                 case "raya":
                     if (i.reproducirse()) {
                         animales.add(new pez(dia, i.masaMuscular, 185 / 1000, 163 / 1000, "raya"));
-                    }break;
+                    }
+                    break;
                 case "merluza negra":
                     if (i.reproducirse()) {
                         animales.add(new pez(dia, i.masaMuscular, 185 / 1000, 163 / 1000, "merluza negra"));
-                    }break;
+                    }
+                    break;
             }
         }
         reproducirKYP();
     }
-    
-    public void reproducirKYP(){
-        if(temperatura<5.5 && temperatura>=5.0){
-            for(int i=0;i<10;i++){
-                for(int j=0;j<1200000000;j++){
-                    animales.add(new kyp(dia, 0, 0, 0));
-                }
-            }     
-        }else if(temperatura<5.0 && temperatura>=4.0){
-            for(int i=0;i<100;i++){
-                for(int j=0;j<220000000;j++){
+
+    public void reproducirKYP() {
+        if (temperatura < 5.5 && temperatura >= 5.0) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 1200000000; j++) {
                     animales.add(new kyp(dia, 0, 0, 0));
                 }
             }
-        }else if(temperatura<4.0 && temperatura>=3.0){
-            for(int i=0;i<100;i++){
-                for(int j=0;j<180000000;j++){
+        } else if (temperatura < 5.0 && temperatura >= 4.0) {
+            for (int i = 0; i < 100; i++) {
+                for (int j = 0; j < 220000000; j++) {
                     animales.add(new kyp(dia, 0, 0, 0));
                 }
-            }      
+            }
+        } else if (temperatura < 4.0 && temperatura >= 3.0) {
+            for (int i = 0; i < 100; i++) {
+                for (int j = 0; j < 180000000; j++) {
+                    animales.add(new kyp(dia, 0, 0, 0));
+                }
+            }
         }
     }
-    
+
     public void muerteInesperada() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
@@ -182,93 +202,100 @@ public class polo_Sur {
                 case "esquimal":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
                 case "oso":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
                 case "morsa":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
                 case "foca":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
                 case "bacalao":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
                 case "raya":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
                 case "merluza negra":
                     if (i.muerteInesperada()) {
                         animales.remove(i);
-                    }break;
+                    }
+                    break;
             }
         }
     }
-    
-    public void cambiarTemperatura(){
+
+    public void cambiarTemperatura() {
         Random r = new Random();
-        if(temperatura>=5.0){
-            if(r.nextFloat()<=0.45){
-                temperatura=+0.2;
-            }else{
-                temperatura=-0.2;
+        if (temperatura >= 5.0) {
+            if (r.nextFloat() <= 0.45) {
+                temperatura = +0.2;
+            } else {
+                temperatura = -0.2;
             }
-        }else if(temperatura<=3.0){
-            if(r.nextFloat()<=0.45){
-                temperatura=-0.2;
-            }else{
-                temperatura=+0.2;
+        } else if (temperatura <= 3.0) {
+            if (r.nextFloat() <= 0.45) {
+                temperatura = -0.2;
+            } else {
+                temperatura = +0.2;
             }
-        }else{
-            if(r.nextFloat()<=0.3){
-                temperatura=-0.2;
-            }else if(r.nextFloat()<=0.95){
-                temperatura=+0.2;
+        } else {
+            if (r.nextFloat() <= 0.3) {
+                temperatura = -0.2;
+            } else if (r.nextFloat() <= 0.95) {
+                temperatura = +0.2;
             }
         }
     }
-    
-        public void comer() {
+    //IMPLEMENTAR METODO
+    public void comer() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             switch (i.raza) {
                 case "esquimal":
-                    
+
                     break;
                 case "oso":
-                    
+
                     break;
                 case "morsa":
-                    
+
                     break;
                 case "foca":
-                    
+
                     break;
                 case "bacalao":
-                    
+
                     break;
                 case "raya":
-                    
+
                     break;
                 case "merluza negra":
-                    
+
                     break;
             }
         }
     }
-        
-        public boolean mundoMuerto(){
+
+    public boolean mundoMuerto() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             switch (i.raza) {
                 case "kypl":
-                    
+
                     break;
                 default:
                     return false;
