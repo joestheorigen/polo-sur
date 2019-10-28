@@ -17,7 +17,6 @@ public class serVivo {
     int masaMuscular;
     float probReproducirse;
     float probMuerte;
-    int comidaNecesaria;
     String raza;
     Random random;
 

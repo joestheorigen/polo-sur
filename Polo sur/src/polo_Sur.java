@@ -15,8 +15,10 @@ public class polo_Sur {
 
     ArrayList<serVivo> animales = new ArrayList<serVivo>();
     double temperatura = 4;
-
+    int dia;
+    
     public void creaNuestroPolo() {
+        dia=1;
         crearEsquimales();
         crearOsos();
         crearMorsas();
@@ -24,13 +26,23 @@ public class polo_Sur {
         crearPeces();
         crearkyp();
     }
-
+    
+    public void diaAdia(){
+        cambiarTemperatura();
+        comer();
+        reproducir();
+        muerteInesperada();
+        if(mundoMuerto()){
+            
+        }
+    }
+    
     public void crearEsquimales() {
         int n, i, masa;                                            //en n ira el numero de esquimales que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (14 - 12 + 1) + 12);          //i es solo para explorar el for
         masa = (int) Math.floor(Math.random() * (48 - 35 + 1) + 35);         //metemos el numero de esquimales iniciales en n
         for (i = 0; i <= n; i++) {
-            animales.add(new esquimal(1, masa, 32 / 1000, 24 / 1000));
+            animales.add(new esquimal(dia, masa, 32 / 1000, 24 / 1000));
         }
     }
 
@@ -39,7 +51,7 @@ public class polo_Sur {
         n = (int) Math.floor(Math.random() * (28 - 22 + 1) + 22);          //i es solo para explorar el for
         masa = (int) Math.floor(Math.random() * (55 - 40 + 1) + 40);         //metemos el numero de esquimales iniciales en n
         for (i = 0; i <= n; i++) {
-            animales.add(new oso(1, masa, 153 / 1000, 95 / 1000));
+            animales.add(new oso(dia, masa, 153 / 1000, 95 / 1000));
         }
     }
 
@@ -48,7 +60,7 @@ public class polo_Sur {
         n = (int) Math.floor(Math.random() * (48 - 42 + 1) + 42);          //i es solo para explorar el for
         masa = (int) Math.floor(Math.random() * (42 - 30 + 1) + 30);         //metemos el numero de esquimales iniciales en n
         for (i = 0; i <= n; i++) {
-            animales.add(new morsa(1, masa, 98 / 1000, 95 / 1000));
+            animales.add(new morsa(dia, masa, 98 / 1000, 95 / 1000));
         }
     }
 
@@ -57,7 +69,7 @@ public class polo_Sur {
         n = (int) Math.floor(Math.random() * (290 - 260 + 1) + 260);       //i es solo para explorar el for
         masa = (int) Math.floor(Math.random() * (32 - 25 + 1) + 25);         //metemos el numero de esquimales iniciales en n
         for (i = 0; i <= n; i++) {
-            animales.add(new foca(1, masa, 100 / 1000, 90 / 1000));
+            animales.add(new foca(dia, masa, 100 / 1000, 90 / 1000));
         }
     }
 
@@ -70,11 +82,11 @@ public class polo_Sur {
         for (i = 0; i <= n; i++) {
             aux = r.nextFloat();
             if (aux <= 0.33) {
-                animales.add(new pez(1, masa, 185 / 1000, 163 / 1000, "bacalao"));
+                animales.add(new pez(dia, masa, 185 / 1000, 163 / 1000, "bacalao"));
             } else if (aux <= 0.66) {
-                animales.add(new pez(1, masa, 185 / 1000, 163 / 1000, "raya"));
+                animales.add(new pez(dia, masa, 185 / 1000, 163 / 1000, "raya"));
             } else {
-                animales.add(new pez(1, masa, 185 / 1000, 163 / 1000, "merluza negra"));
+                animales.add(new pez(dia, masa, 185 / 1000, 163 / 1000, "merluza negra"));
             }
         }
     }
@@ -84,7 +96,7 @@ public class polo_Sur {
         n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);          //i es solo para explorar el for
         n = n * 1000000000;                                          //metemos el numero de esquimales iniciales en n
         for (i = 0; i <= n; i++) {
-            animales.add(new kyp(1, 0, 0, 0));
+            animales.add(new kyp(dia, 0, 0, 0));
         }
     }
 
@@ -104,7 +116,7 @@ public class polo_Sur {
         }
     }
 
-    public void reproducir(int dia) {
+    public void reproducir() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             switch (i.raza) {
@@ -138,10 +150,10 @@ public class polo_Sur {
                     }break;
             }
         }
-        reproducirKYP(dia);
+        reproducirKYP();
     }
     
-    public void reproducirKYP(int dia){
+    public void reproducirKYP(){
         if(temperatura<5.5 && temperatura>=5.0){
             for(int i=0;i<10;i++){
                 for(int j=0;j<1200000000;j++){
@@ -198,7 +210,7 @@ public class polo_Sur {
             }
         }
     }
-    //MACRO PREGUNTAR QUE SI NO LA LIAS PARDA QUE TE CAGAS
+    
     public void cambiarTemperatura(){
         Random r = new Random();
         if(temperatura>=5.0){
@@ -220,5 +232,48 @@ public class polo_Sur {
                 temperatura=+0.2;
             }
         }
+    }
+    
+        public void comer() {
+        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+        for (serVivo i : aux) {
+            switch (i.raza) {
+                case "esquimal":
+                    
+                    break;
+                case "oso":
+                    
+                    break;
+                case "morsa":
+                    
+                    break;
+                case "foca":
+                    
+                    break;
+                case "bacalao":
+                    
+                    break;
+                case "raya":
+                    
+                    break;
+                case "merluza negra":
+                    
+                    break;
+            }
+        }
+    }
+        
+        public boolean mundoMuerto(){
+        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+        for (serVivo i : aux) {
+            switch (i.raza) {
+                case "kypl":
+                    
+                    break;
+                default:
+                    return false;
+            }
+        }
+        return true;
     }
 }
