@@ -4,23 +4,15 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author joest
- */
 public class polo_Sur {
 
     ArrayList<serVivo> animales = new ArrayList<serVivo>();
-    double temperatura = 4;
+    double temperatura;
     int dia;
 
     public polo_Sur() {
         dia = 0;
+        temperatura = 4;
         crearEsquimales();
         crearOsos();
         crearMorsas();
@@ -28,7 +20,7 @@ public class polo_Sur {
         crearPeces();
         crearkyp();
     }
-
+    
     public void diaAdia() {
         dia++;
         cambiarTemperatura();
@@ -108,13 +100,11 @@ public class polo_Sur {
         int n, i;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);          //i es solo para explorar el for
         n = n * 1000000000;                                          //metemos el numero de esquimales iniciales en n
-        for (i = 0; i <= n; i++) {
-            animales.add(new kyp(dia, 0, 0, 0));
-        }
+        animales.add(new kyp(dia, 0, 0, 0, n));
     }
 
     public void calentamientoGlobal() {
-        temperatura = +2;
+        temperatura = temperatura+2;
     }
 
     public void cazaFurtiva() {
@@ -175,23 +165,34 @@ public class polo_Sur {
 
     public void reproducirKYP() {
         if (temperatura < 5.5 && temperatura >= 5.0) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 1200000000; j++) {
-                    animales.add(new kyp(dia, 0, 0, 0));
-                }
-            }
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
         } else if (temperatura < 5.0 && temperatura >= 4.0) {
-            for (int i = 0; i < 100; i++) {
-                for (int j = 0; j < 220000000; j++) {
-                    animales.add(new kyp(dia, 0, 0, 0));
-                }
-            }
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
         } else if (temperatura < 4.0 && temperatura >= 3.0) {
-            for (int i = 0; i < 100; i++) {
-                for (int j = 0; j < 180000000; j++) {
-                    animales.add(new kyp(dia, 0, 0, 0));
-                }
-            }
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
         }
     }
 
@@ -242,50 +243,53 @@ public class polo_Sur {
         Random r = new Random();
         if (temperatura >= 5.0) {
             if (r.nextFloat() <= 0.45) {
-                temperatura = +0.2;
+                temperatura = temperatura + 0.2;
             } else {
-                temperatura = -0.2;
+                temperatura = temperatura - 0.2;
             }
         } else if (temperatura <= 3.0) {
             if (r.nextFloat() <= 0.45) {
-                temperatura = -0.2;
+                temperatura = temperatura - 0.2;
             } else {
-                temperatura = +0.2;
+                temperatura = temperatura + 0.2;
             }
         } else {
             if (r.nextFloat() <= 0.3) {
-                temperatura = -0.2;
+                temperatura = temperatura - 0.2;
             } else if (r.nextFloat() <= 0.95) {
-                temperatura = +0.2;
+                temperatura = temperatura + 0.2;
             }
         }
     }
+
     //IMPLEMENTAR METODO
     public void comer() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
-            switch (i.raza) {
-                case "esquimal":
+            if (animales.contains(i)) {
+                switch (i.raza) {
+                    case "esquimal":
+                        
+                        break;
+                    case "oso":
 
-                    break;
-                case "oso":
+                        break;
+                    case "morsa":
 
-                    break;
-                case "morsa":
+                        break;
+                    case "foca":
 
-                    break;
-                case "foca":
+                        break;
+                    case "bacalao":
 
-                    break;
-                case "bacalao":
+                        break;
+                    case "raya":
 
-                    break;
-                case "raya":
+                        break;
+                    case "merluza negra":
 
-                    break;
-                case "merluza negra":
-
-                    break;
+                        break;
+                }
             }
         }
     }

@@ -8,15 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author joest
- */
 public class Ventana extends JFrame implements ActionListener {
 
     JButton crear = new JButton("Crear nuevo polo");
@@ -44,7 +35,7 @@ public class Ventana extends JFrame implements ActionListener {
         pasar10Dias.setActionCommand("10 dias");
         detalles.setActionCommand("detalles");
         calentar.setActionCommand("calentar");
-        caza.setActionCommand("caza");
+        caza.setActionCommand("cazar");
 
         this.add(crear);
         this.add(pasarDia);
@@ -68,7 +59,7 @@ public class Ventana extends JFrame implements ActionListener {
             case "dia":
                 if (polo != null) {
                     polo.diaAdia();
-                    JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia + 1);
+                    JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
@@ -118,8 +109,8 @@ public class Ventana extends JFrame implements ActionListener {
 
             case "calentar":
                 if (polo != null) {
-                    polo.cazaFurtiva();
-                    JOptionPane.showMessageDialog(new JFrame(), "caza furtiva realizada ");
+                    polo.calentamientoGlobal();
+                    JOptionPane.showMessageDialog(new JFrame(), "Temperatura sube a "+polo.temperatura);
                     break;
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");

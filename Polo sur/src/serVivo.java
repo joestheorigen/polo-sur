@@ -1,16 +1,5 @@
-
 import java.util.Random;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author joest
- */
 public class serVivo {
 
     int dia;
@@ -18,7 +7,6 @@ public class serVivo {
     float probReproducirse;
     float probMuerte;
     String raza;
-    Random random;
 
     public serVivo(int dia, int masaM, float probRepro, float probM, String raza) {
         this.dia = dia;
@@ -29,18 +17,10 @@ public class serVivo {
     }
 
     public boolean muerteInesperada() {
-        if (random.nextFloat() <= probMuerte) {
-            return true;
-        } else {
-            return false;
-        }
+        return Float.compare((float)Math.random(), probMuerte) <= 0;
     }
 
     public boolean reproducirse() {
-        if (random.nextFloat() <= probReproducirse) {
-            return true;
-        } else {
-            return false;
-        }
+        return Float.compare((float)Math.random(), probReproducirse) <= 0;
     }
 }

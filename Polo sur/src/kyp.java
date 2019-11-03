@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author joest
- */
 public class kyp extends serVivo{
-    public kyp(int dia, int masaM, float probRepro, float probM){
+    int num;        //Como hay mucho kyp y todos son iguales los agruparemos y esta 
+                    //variable sera el numero de kpy que nacieron ese dia y siguen vivios
+    public kyp(int dia, int masaM, float probRepro, float probM, int num){
         super(dia,masaM,probRepro,probM,"kyp");
+        this.num=num;
     }
 }
