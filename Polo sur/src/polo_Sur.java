@@ -11,7 +11,7 @@ public class polo_Sur {
     int dia;
 
     public polo_Sur() {
-        dia = 0;
+        dia = 1;
         temperatura = 4;
         crearEsquimales();
         crearOsos();
@@ -20,91 +20,98 @@ public class polo_Sur {
         crearPeces();
         crearkyp();
     }
-    
-    public void diaAdia() {
+
+    public boolean diaAdia() {
         dia++;
         cambiarTemperatura();
         comer();
         reproducir();
         muerteInesperada();
+        if (mundoMuerto()) {
+            JOptionPane.showMessageDialog(new JFrame(), "El mundo esta muerto en el dia " + dia);
+            return true;
+        }
+        return false;
     }
 
-    public void pasar10dias() {
-        for (int i = 0; i < 10; i++) {
-            dia++;
-            cambiarTemperatura();
-            comer();
-            reproducir();
-            muerteInesperada();
-            if (mundoMuerto()) {
-                JOptionPane.showMessageDialog(new JFrame(), "El mundo esta muerto en el dia" + dia);
-            }
+public boolean pasar10dias() {
+    for (int i = 0; i < 10; i++) {
+        dia++;
+        cambiarTemperatura();
+        comer();
+        reproducir();
+        muerteInesperada();
+        if (mundoMuerto()) {
+            JOptionPane.showMessageDialog(new JFrame(), "El mundo esta muerto en el dia " + dia);
+            return true;
         }
     }
-
+    return false;
+}
+        
     public void crearEsquimales() {
-        int n, i, masa;                                            //en n ira el numero de esquimales que abra al principio, i es solo para explorar el for
+        int n, i, masa;                                                    //en n ira el numero de esquimales que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (14 - 12 + 1) + 12);          //i es solo para explorar el for
-        masa = (int) Math.floor(Math.random() * (48 - 35 + 1) + 35);         //metemos el numero de esquimales iniciales en n
-        for (i = 0; i <= n; i++) {
-            animales.add(new esquimal(dia, masa, 32 / 1000, 24 / 1000));
+        for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
+            masa = (int) Math.floor(Math.random() * (48 - 35 + 1) + 35);
+            animales.add(new esquimal(dia, masa, (float) (32.0 / 1000.0), (float) (24.0 / 1000.0)));
         }
     }
 
     public void crearOsos() {
-        int n, i, masa;                                            //en n ira el numero de oso que abra al principio, i es solo para explorar el for
+        int n, i, masa;                                                    //en n ira el numero de oso que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (28 - 22 + 1) + 22);          //i es solo para explorar el for
-        masa = (int) Math.floor(Math.random() * (55 - 40 + 1) + 40);         //metemos el numero de esquimales iniciales en n
-        for (i = 0; i <= n; i++) {
-            animales.add(new oso(dia, masa, 153 / 1000, 95 / 1000));
+        for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
+            masa = (int) Math.floor(Math.random() * (55 - 40 + 1) + 40);
+            animales.add(new oso(dia, masa, (float) (153.0 / 1000.0), (float) (95.0 / 1000.0)));
         }
     }
 
     public void crearMorsas() {
-        int n, i, masa;                                            //en n ira el numero de morsas que abra al principio, i es solo para explorar el for
+        int n, i, masa;                                                    //en n ira el numero de morsas que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (48 - 42 + 1) + 42);          //i es solo para explorar el for
-        masa = (int) Math.floor(Math.random() * (42 - 30 + 1) + 30);         //metemos el numero de esquimales iniciales en n
-        for (i = 0; i <= n; i++) {
-            animales.add(new morsa(dia, masa, 98 / 1000, 95 / 1000));
+        for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
+            masa = (int) Math.floor(Math.random() * (42 - 30 + 1) + 30);
+            animales.add(new morsa(dia, masa, (float) (98.0 / 1000.0), (float) (95.0 / 1000.0)));
         }
     }
 
     public void crearFocas() {
-        int n, i, masa;                                            //en n ira el numero de focas que abra al principio, i es solo para explorar el for
+        int n, i, masa;                                                    //en n ira el numero de focas que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (290 - 260 + 1) + 260);       //i es solo para explorar el for
-        masa = (int) Math.floor(Math.random() * (32 - 25 + 1) + 25);         //metemos el numero de esquimales iniciales en n
-        for (i = 0; i <= n; i++) {
-            animales.add(new foca(dia, masa, 100 / 1000, 90 / 1000));
+        for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
+            masa = (int) Math.floor(Math.random() * (32 - 25 + 1) + 25);
+            animales.add(new foca(dia, masa, (float) (100.0 / 1000.0), (float) (90.0 / 1000.0)));
         }
     }
 
     public void crearPeces() {
         Random r = new Random();
-        float aux;                                                 //en aux tendremos el numero aleatorio para elegir el tipo de pez
-        int n, i, masa;                                            //en n ira el numero de peces que abra al principio, i es solo para explorar el for
+        float aux;                                                         //en aux tendremos el numero aleatorio para elegir el tipo de pez
+        int n, i, masa;                                                    //en n ira el numero de peces que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (8000 - 7000 + 1) + 7000);    //i es solo para explorar el for
-        masa = (int) Math.floor(Math.random() * (70 - 55 + 1) + 55);         //metemos el numero de esquimales iniciales en n
-        for (i = 0; i <= n; i++) {
+        for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
             aux = r.nextFloat();
+            masa = (int) Math.floor(Math.random() * (70 - 55 + 1) + 55);
             if (aux <= 0.33) {
-                animales.add(new pez(dia, masa, 185 / 1000, 163 / 1000, "bacalao"));
+                animales.add(new pez(dia, masa, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "bacalao"));
             } else if (aux <= 0.66) {
-                animales.add(new pez(dia, masa, 185 / 1000, 163 / 1000, "raya"));
+                animales.add(new pez(dia, masa, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "raya"));
             } else {
-                animales.add(new pez(dia, masa, 185 / 1000, 163 / 1000, "merluza negra"));
+                animales.add(new pez(dia, masa, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "merluza negra"));
             }
         }
     }
 
     public void crearkyp() {
-        int n, i;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
+        int n;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);          //i es solo para explorar el for
         n = n * 1000000000;                                          //metemos el numero de esquimales iniciales en n
         animales.add(new kyp(dia, 0, 0, 0, n));
     }
 
     public void calentamientoGlobal() {
-        temperatura = temperatura+2;
+        temperatura = temperatura + 2;
     }
 
     public void cazaFurtiva() {
@@ -125,37 +132,37 @@ public class polo_Sur {
             switch (i.raza) {
                 case "esquimal":
                     if (i.reproducirse()) {
-                        animales.add(new esquimal(dia, i.masaMuscular, 32 / 1000, 24 / 1000));
+                        animales.add(new esquimal(dia, i.masaMuscular, (float) (32.0 / 1000.0), (float) (24.0 / 1000.0)));
                     }
                     break;
                 case "oso":
                     if (i.reproducirse()) {
-                        animales.add(new oso(dia, i.masaMuscular, 153 / 1000, 95 / 1000));
+                        animales.add(new oso(dia, i.masaMuscular, (float) (153.0 / 1000.0), (float) (95.0 / 1000.0)));
                     }
                     break;
                 case "morsa":
                     if (i.reproducirse()) {
-                        animales.add(new morsa(dia, i.masaMuscular, 98 / 1000, 95 / 1000));
+                        animales.add(new morsa(dia, i.masaMuscular, (float) (98.0 / 1000.0), (float) (95.0 / 1000.0)));
                     }
                     break;
                 case "foca":
                     if (i.reproducirse()) {
-                        animales.add(new foca(dia, i.masaMuscular, 100 / 1000, 90 / 1000));
+                        animales.add(new foca(dia, i.masaMuscular, (float) (100.0 / 1000.0), (float) (90.0 / 1000.0)));
                     }
                     break;
                 case "bacalao":
                     if (i.reproducirse()) {
-                        animales.add(new pez(dia, i.masaMuscular, 185 / 1000, 163 / 1000, "bacalao"));
+                        animales.add(new pez(dia, i.masaMuscular, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "bacalao"));
                     }
                     break;
                 case "raya":
                     if (i.reproducirse()) {
-                        animales.add(new pez(dia, i.masaMuscular, 185 / 1000, 163 / 1000, "raya"));
+                        animales.add(new pez(dia, i.masaMuscular, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "raya"));
                     }
                     break;
                 case "merluza negra":
                     if (i.reproducirse()) {
-                        animales.add(new pez(dia, i.masaMuscular, 185 / 1000, 163 / 1000, "merluza negra"));
+                        animales.add(new pez(dia, i.masaMuscular, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "merluza negra"));
                     }
                     break;
             }
@@ -269,7 +276,7 @@ public class polo_Sur {
             if (animales.contains(i)) {
                 switch (i.raza) {
                     case "esquimal":
-                        
+
                         break;
                     case "oso":
 
@@ -298,7 +305,7 @@ public class polo_Sur {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             switch (i.raza) {
-                case "kypl":
+                case "kyp":
 
                     break;
                 default:
@@ -306,5 +313,35 @@ public class polo_Sur {
             }
         }
         return true;
+    }
+
+    public ArrayList<String> toString(String raza) {
+        ArrayList<String> f = new ArrayList<String>();
+        for (serVivo i : animales) {
+            if (i.raza.equals(raza)) {
+                f.add(i.toString());
+            }
+        }
+        return f;
+    }
+    
+    public int contarRaza(String raza) {
+        int j=0;
+        for (serVivo i : animales) {
+            if (i.raza.equals(raza)) {
+                j++;
+            }
+        }
+        return j;
+    }
+    
+    public int contarKYP() {
+        int j=0;
+        for (serVivo i : animales) {
+            if (i instanceof kyp) {
+                j=j+((kyp) i).num;
+            }
+        }
+        return j;
     }
 }

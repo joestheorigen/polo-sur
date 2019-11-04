@@ -30,6 +30,6 @@ public class morsa extends serVivo {
         }
     }
     public String toString(){
-        return "raza morsa nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
+        return "Morsa nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
     }
 }

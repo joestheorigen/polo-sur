@@ -36,6 +36,6 @@ public class oso extends serVivo {
         }
     }
     public String toString(){
-        return "raza oso polar nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
+        return "Oso polar nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
     }
 }

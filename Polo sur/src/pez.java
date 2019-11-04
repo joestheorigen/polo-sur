@@ -2,11 +2,8 @@ import java.util.Random;
 
 public class pez extends serVivo {
 
-    String tipo;
-
     public pez(int dia, int masaM, float probRepro, float probM, String tipo) {
         super(dia, masaM, probRepro, probM, tipo);
-        this.tipo = tipo;
     }
 
     public int comerFocas() {
@@ -20,6 +17,6 @@ public class pez extends serVivo {
         }
     }
     public String toString(){
-        return "raza pez nacido en el dia "+this.dia+" con masa "+this.masaMuscular+", de raza en especifica "+this.tipo;
+        return "Pez nacido en el dia "+this.dia+" con masa "+this.masaMuscular+", de raza en especifica "+this.raza;
     }
 }

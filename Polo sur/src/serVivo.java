@@ -1,3 +1,4 @@
+
 import java.util.Random;
 
 public class serVivo {
@@ -7,6 +8,7 @@ public class serVivo {
     float probReproducirse;
     float probMuerte;
     String raza;
+    Random r;
 
     public serVivo(int dia, int masaM, float probRepro, float probM, String raza) {
         this.dia = dia;
@@ -17,10 +19,12 @@ public class serVivo {
     }
 
     public boolean muerteInesperada() {
-        return Float.compare((float)Math.random(), probMuerte) <= 0;
+        r = new Random();
+        return Float.compare(r.nextFloat(), probMuerte) <= 0;
     }
 
     public boolean reproducirse() {
-        return Float.compare((float)Math.random(), probReproducirse) <= 0;
+        r = new Random();
+        return Float.compare(r.nextFloat(), probReproducirse) <= 0;
     }
 }

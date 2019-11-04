@@ -35,6 +35,6 @@ public class foca extends serVivo {
         }
     }
     public String toString(){
-        return "raza foca nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
+        return "Foca nacido en el dia "+this.dia+" con masa "+this.masaMuscular;
     }
 }

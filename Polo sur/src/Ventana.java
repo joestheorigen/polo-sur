@@ -1,4 +1,3 @@
-
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,8 @@ public class Ventana extends JFrame implements ActionListener {
     JButton detalles = new JButton("Detalles del dia actual");
     JButton calentar = new JButton("calentamiento global");
     JButton caza = new JButton("Caza furtiva");
-    polo_Sur polo = null;
+    JButton salir = new JButton("Salir de la aplicacion");
+    polo_Sur polo;
 
     public Ventana(String titulo) {
         super(titulo);
@@ -29,6 +29,7 @@ public class Ventana extends JFrame implements ActionListener {
         detalles.addActionListener(this);
         calentar.addActionListener(this);
         caza.addActionListener(this);
+        salir.addActionListener(this);
 
         crear.setActionCommand("crear");
         pasarDia.setActionCommand("dia");
@@ -36,6 +37,7 @@ public class Ventana extends JFrame implements ActionListener {
         detalles.setActionCommand("detalles");
         calentar.setActionCommand("calentar");
         caza.setActionCommand("cazar");
+        salir.setActionCommand("salir");
 
         this.add(crear);
         this.add(pasarDia);
@@ -43,9 +45,10 @@ public class Ventana extends JFrame implements ActionListener {
         this.add(detalles);
         this.add(calentar);
         this.add(caza);
+        this.add(salir);
 
         this.setVisible(true);
-        this.setSize(300, 150);
+        this.setSize(300, 175);
     }
 
     @Override
@@ -58,8 +61,11 @@ public class Ventana extends JFrame implements ActionListener {
 
             case "dia":
                 if (polo != null) {
-                    polo.diaAdia();
-                    JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
+                    if(!polo.diaAdia()){
+                        JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
+                    }else{
+                        System.exit(0);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
@@ -67,8 +73,11 @@ public class Ventana extends JFrame implements ActionListener {
 
             case "10 dias":
                 if (polo != null) {
-                    polo.pasar10dias();
-                    JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
+                    if(!polo.pasar10dias()){
+                        JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
+                    }else{
+                        System.exit(0);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
@@ -79,16 +88,38 @@ public class Ventana extends JFrame implements ActionListener {
                     detallesView d = new detallesView();
                     DefaultListModel<String> m = new DefaultListModel<String>();
                     ArrayList<String> aux = new ArrayList<String>();
-                    //POR IMPLEMENTAR EN polo_Sur (con meter en el array el to String de cada clase sobra)
-                    //LOS METODOS DEVUELVEN EL toString DE CADA RAZA Y AÑADEN EN aux
-                    //metodo donde se añaden peces(tipo raya)
-                    //metodo donde se añaden peces(tipo bacalao)
-                    //metodo donde se añaden peces(tipo no me acuerdo pero solo resta uno)
-                    //metodo donde se añaden focas.
-                    //metodo donde se añaden morsas.
-                    //metodo donde se añaden osos.
-                    //metodo donde se añaden esquimales.
-                    aux.add("el dia es " + polo.dia);
+
+                    aux.add(" ");
+                    aux.add("El dia es: " + polo.dia);
+                    aux.add(" ");
+                    aux.add("La temperatura es: "+polo.temperatura+" grados.");
+                    aux.add(" ");
+                    aux.add("El numero de kyp es: "+polo.contarKYP());
+                    aux.add(" ");
+                    aux.add("Raza Esquimal: " + polo.contarRaza("esquimal"));
+                    aux.addAll(polo.toString("esquimal"));
+                    aux.add(" ");
+                    aux.add("Raza Oso: " + polo.contarRaza("oso"));
+                    aux.addAll(polo.toString("oso"));
+                    aux.add(" ");
+                    aux.add("Raza Morsa: " + polo.contarRaza("morsa"));
+                    aux.addAll(polo.toString("morsa"));
+                    aux.add(" ");
+                    aux.add("Raza Foca: " + polo.contarRaza("foca"));
+                    aux.addAll(polo.toString("foca"));
+                    aux.add(" ");
+                    aux.add("Raza pez con: " + (polo.contarRaza("bacalao") + polo.contarRaza("bacalao")
+                            + polo.contarRaza("bacalao")) + " peces. Luego hay 3 tipos que son:");
+                    aux.add(" ");
+                    aux.add("Raza Bacalao: " + polo.contarRaza("bacalao"));
+                    aux.addAll(polo.toString("bacalao"));
+                    aux.add(" ");
+                    aux.add("Raza Raya: " + polo.contarRaza("raya"));
+                    aux.addAll(polo.toString("raya"));
+                    aux.add(" ");
+                    aux.add("Raza meluza negra: " + polo.contarRaza("merluza negra"));
+                    aux.addAll(polo.toString("merluza negra"));
+
                     for (String i : aux) {
                         m.addElement(i);
                     }
@@ -110,11 +141,14 @@ public class Ventana extends JFrame implements ActionListener {
             case "calentar":
                 if (polo != null) {
                     polo.calentamientoGlobal();
-                    JOptionPane.showMessageDialog(new JFrame(), "Temperatura sube a "+polo.temperatura);
-                    break;
+                    JOptionPane.showMessageDialog(new JFrame(), "Temperatura sube a " + polo.temperatura);
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
+                break;
+            case "salir":
+                System.exit(0);
+                break;
         }
     }
 }
