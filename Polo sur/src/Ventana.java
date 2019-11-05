@@ -94,7 +94,7 @@ public class Ventana extends JFrame implements ActionListener {
                     aux.add(" ");
                     aux.add("La temperatura es: "+polo.temperatura+" grados.");
                     aux.add(" ");
-                    aux.add("El numero de kyp es: "+polo.contarKYP());
+                    aux.add("El numero de kyp es: "+polo.contarKYP()+"000000000");
                     aux.add(" ");
                     aux.add("Raza Esquimal: " + polo.contarRaza("esquimal"));
                     aux.addAll(polo.toString("esquimal"));
