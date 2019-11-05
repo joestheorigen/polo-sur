@@ -106,7 +106,8 @@ public boolean pasar10dias() {
     public void crearkyp() {
         int n;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);          //i es solo para explorar el for
-        n = n * 1000000000;                                          //metemos el numero de esquimales iniciales en n
+        n = n * 1000000000;                                          //metemos el numero de esquimales iniciales en nç
+        System.out.println(n);
         animales.add(new kyp(dia, 0, 0, 0, n));
     }
 
@@ -269,38 +270,255 @@ public boolean pasar10dias() {
         }
     }
 
-    //IMPLEMENTAR METODO
-    public void comer() {
-        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+//IMPLEMENTAR METODO
+    //DEBO HACER MEJOR LO DE QUE SI NO ENCUENTRA UN PEZ INTENTE CAZAR OTRO
+    public void comer() {                                                   //cuando un animal come mueren otros animales
+        Random r = new Random();                                            //creamos un random que va de 0.00 a 1.00 para ver cuanto comerá el animal
+        float x; //la usamos para almacenar el numero random
+        int j;  //la usamos para recorrer los for
+        boolean esperanza;  // si es true es que ha podido comer y esta vivo, si es false es que no ha podido comer y esta muerto
+        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();     //gracias a aux podemos exploarar todos los animales
         for (serVivo i : aux) {
-            if (animales.contains(i)) {
-                switch (i.raza) {
-                    case "esquimal":
-
-                        break;
-                    case "oso":
-
-                        break;
-                    case "morsa":
-
-                        break;
-                    case "foca":
-
-                        break;
-                    case "bacalao":
-
-                        break;
-                    case "raya":
-
-                        break;
-                    case "merluza negra":
-
-                        break;
-                }
+            switch (i.raza) {                                               //aqui miramos que raza va a alimentarse
+                case "esquimal":                                            //si se alimenta el esquimal
+                    x= r.nextFloat();   //primero vemos cuantos peces comera
+                    if(x<=0.33){
+                        for(j=1;j<=2;j++){      //comera 2 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }                                          
+                           
+                        }
+                    }
+                    else if(x<=0.66){
+                        for(j=1;j<=3;j++){      //comera 3 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    else{
+                        for(j=1;j<=4;j++){      //comera 4 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    x = r.nextFloat();  //ahora vemos cuantas focas comera
+                    if(x>0.50){                     //hay un 50% de probabilidades de que coma una foca, si no no comera foca
+                        esperanza = esComido("foca", i);
+                        if(!esperanza){
+                            break;
+                        }
+                    }
+                    break;
+                case "oso":                                                 //si se alimenta el oso
+                    x = r.nextFloat();   //primero vemos cuantas focas comera
+                    if(x<=0.50){                    //Se comera una 
+                        esperanza = esComido("foca", i);
+                        if(!esperanza){
+                            break;
+                        }
+                    }
+                    else{
+                        for(j=1;j<=2;j++){      //se comera 2 focas
+                            esperanza = esComido("foca", i);
+                            if(!esperanza){
+                                break;
+                            }
+                        }
+                    }
+                    x = r.nextFloat();  //ahora vemos cuantos peces se come
+                    if(x<=0.16){
+                        for(j=1;j<=10;j++){     //se comera 10 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                        
+                    }
+                    else if(x<=0.33){
+                        for(j=1;j<=11;j++){     //se comera 11 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    else if(x<=0.50){
+                        for(j=1;j<=12;j++){     //se comera 12 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    else if(x<=0.66){
+                        for(j=1;j<=13;j++){     //se comera 13 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    else if(x<=0.83){
+                        for(j=1;j<=14;j++){     //se comera 14 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    else{
+                        for(j=1;j<=15;j++){     //se comera 15 peces
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    break;
+                case "morsa":                                               //si se alimenta la morsa
+                    x = r.nextFloat();   //primero vemos cuantas focas comera
+                    if(x<=0.50){                    //Se comera una 
+                        esperanza = esComido("foca", i);
+                        if(!esperanza){
+                            break;
+                        }
+                    }
+                    else{
+                        for(j=1;j<=2;j++){      //se comera 2 focas
+                            esperanza = esComido("foca", i);
+                            if(!esperanza){
+                                break;
+                            }
+                        }
+                    }
+                    x = r.nextFloat();   //primero vemos cuantos osos comera
+                    if((x<0.33)){    //Se comera uno 
+                        esperanza = esComido("oso", i);
+                            if(!esperanza){
+                                break;
+                            }
+                    }
+                    else if(x<0.66){            //Se comera 2
+                        for(j=1;j<=2;j++){
+                            esperanza = esComido("oso", i);
+                            if(!esperanza){
+                                break;
+                            }                            
+                        }                        
+                    }
+                    break;
+                case "foca":                                                //si se alimenta la foca
+                    x = r.nextFloat();   //primero vemos cuantos peces comera
+                    if(x<=0.16){                    //Se comera una 
+                        for(j=1;j<=15;j++){     //se come 15 pescados
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }
+                    }
+                    else if (x<=0.33){
+                        for(j=1;j<=16;j++){     //se come 16 pescados
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }                        
+                    }
+                    else if (x<=0.50){
+                        for(j=1;j<=17;j++){     //se come 17 pescados
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }                        
+                    }
+                    else if (x<=0.66){
+                        for(j=1;j<=18;j++){     //se come 18 pescados
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }                        
+                    }
+                    else if (x<=0.83){
+                        for(j=1;j<=19;j++){     //se come 19 pescados
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }                        
+                    }
+                    else{
+                        for(j=1;j<=20;j++){     //se come 20 pescados
+                            esperanza = esComido("pez", i);
+                            if(!esperanza){ //si es false es que ha muerto el depredador al no poder comer
+                                break;     //si ha muerto el depredador sale del switch
+                            }
+                        }                        
+                    }
+                    break;
+                case "bacalao":                                             //si se alimenta el bacalao
+                    x = r.nextFloat();
+                    if(x<=50){
+                        esperanza = esComido("kyp", i);
+                            if(!esperanza){
+                                break;
+                            }
+                    }
+                    else{
+                        for(j=1;j<=2;j++){
+                         esperanza = esComido("kyp", i);
+                            if(!esperanza){
+                                break;
+                            }   
+                        }                        
+                    }
+                    break;
+                case "raya":                                                //si se alimenta la raya
+                    x = r.nextFloat();
+                    if(x<=50){
+                        esperanza = esComido("kyp", i);
+                            if(!esperanza){
+                                break;
+                            }
+                    }
+                    else{
+                        for(j=1;j<=2;j++){
+                         esperanza = esComido("kyp", i);
+                            if(!esperanza){
+                                break;
+                            }   
+                        }                        
+                    }
+                    break;
+                case "merluza negra":                                       //si se alimenta la merluza negra
+                    x = r.nextFloat();
+                    if(x<=50){
+                        esperanza = esComido("kyp", i);
+                            if(!esperanza){
+                                break;
+                            }
+                    }
+                    else{
+                        for(j=1;j<=2;j++){
+                         esperanza = esComido("kyp", i);
+                            if(!esperanza){
+                                break;
+                            }   
+                        }                        
+                    }
+                    break;
             }
         }
     }
-
     public boolean mundoMuerto() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
@@ -315,6 +533,147 @@ public boolean pasar10dias() {
         return true;
     }
 
+    
+    public boolean esComido(String comido, serVivo depredador) {        
+        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+        int pesoMasPequeno = Integer.MAX_VALUE;
+        serVivo masPequeno = new esquimal(0, 1000000, 0.0f, 0.0f);  //lo usaremos para comparar los pesos entre los animales, si un esquimal, era por darles uso
+        boolean puedeComer = false; //al principio a fasle porque no sabemos si podra comer
+        if(comido.equals("pez")){          //como hay tres tipos de peces deberemos sacar el mas pequeno pero de entre todas las razas
+            System.out.println("Puedo comer pez");
+            for (serVivo i : aux) {     //recorremos todos los animales
+                if(i.raza.equals("bacalao")){   //si es bacalao cuenta como pez
+                    puedeComer = true;  //con que encuentre uno de la raza que quiere comer sera true que ha comido                    
+                    if(i.masaMuscular<pesoMasPequeno){  //cada vez que encontremos un animal del que queremos comer y sea mas pequeno que el mas pequeno hasta ahora
+                        pesoMasPequeno = i.masaMuscular;    //nos lo quedamos como nuevo mas pequeno
+                        masPequeno = i;                     //para luego comernoslos a no ser que encontremos otro mas pequeno
+                    }
+                }
+                else if(i.raza.equals("raya")){  //si es raya cuenta como pez
+                    puedeComer = true;  //con que encuentre uno de la raza que quiere comer sera true que ha comido
+                    if(i.masaMuscular<pesoMasPequeno){  //cada vez que encontremos un animal del que queremos comer y sea mas pequeno que el mas pequeno hasta ahora
+                        pesoMasPequeno = i.masaMuscular;    //nos lo quedamos como nuevo mas pequeno
+                        masPequeno = i;                     //para luego comernoslos a no ser que encontremos otro mas pequeno
+                    }
+                }
+                else if(i.raza.equals("merluza negra")){  //si es merluza negra cuenta como pez
+                    puedeComer = true;  //con que encuentre uno de la raza que quiere comer sera true que ha comido
+                    if(i.masaMuscular<pesoMasPequeno){  //cada vez que encontremos un animal del que queremos comer y sea mas pequeno que el mas pequeno hasta ahora
+                        pesoMasPequeno = i.masaMuscular;    //nos lo quedamos como nuevo mas pequeno
+                        masPequeno = i;                     //para luego comernoslos a no ser que encontremos otro mas pequeno
+                    }
+                }
+            }
+        }
+        else if(comido.equals("kyp")){
+            System.out.println("Puedo comer kyp");
+            boolean estoyComiendo;  //para comprobar si puede tomarse toda su racion de krill y plankton
+            estoyComiendo = comeKyP(depredador);    //comer 1 es como comer 1000000 de Kyp
+            if(!estoyComiendo){ //si en algun momento no queda Krill ni plankton y no puede comer todo lo que debia
+                return false;   //el depredador muere
+            }
+            
+            return true;            
+        }
+        else{       //si no es pez ni plankton o krill lo que queremos comer
+            for (serVivo i : aux) {     //recorremos todos los animales
+                if(i.raza == comido){   //si encontramos alguno de la raza que queremos comer
+                    puedeComer = true;  //con que encuentre uno de la raza que quiere comer sera true que ha comido
+                    if(i.masaMuscular<pesoMasPequeno){  //cada vez que encontremos un animal del que queremos comer y sea mas pequeno que el mas pequeno hasta ahora
+                        pesoMasPequeno = i.masaMuscular;    //nos lo quedamos como nuevo mas pequeno
+                        masPequeno = i;                     //para luego comernoslos a no ser que encontremos otro mas pequeno
+                    }
+                }
+            }
+        }
+        if(puedeComer){ //si ha podido comer
+            System.out.println("he comido");
+            animales.remove(masPequeno); //pues se come al mas pequeno
+            return true;    //y el depredador puede vivir un poco mas
+        }
+        System.out.println("me muero");
+        animales.remove(depredador);  //si no ha comido muere
+        return false;  //y devuelve false
+    }
+/*        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+        int peso = 0;
+        for (serVivo i : aux) {     //recorremos todos los animales
+            if(i.raza == comido){   //si encontramos uno de la raza que queremos comer
+            //gracias a los return solo se come uno si puede cada vez que se llama al metodo
+                switch (i.raza) {
+                    case "esquimal":    //comemos esquimal
+                        for(int j=1;;j++){              //primero debemos sacar el que menos masa tiene
+                         animales.remove(i); //despues nos lo comemos   
+                         if (j.masaMuscular)return true;
+                        }                        
+                        
+                    case "oso":         //comemos oso
+                        animales.remove(i);
+                        return true;
+                    case "morsa":       //comemos morsa
+                        animales.remove(i);
+                        return true;                        
+                    case "foca":        //comemos foca
+                        animales.remove(i);
+                        return true;
+                    case "bacalao":     //comemos bacalao                        
+                            animales.remove(i);                        
+                        return true;
+                    case "raya":
+                        animales.remove(i);
+                        return true;
+                    case "merluza negra":                        
+                        animales.remove(i);
+                        return true;
+                    case "Kypl":        //si comemos Krill y plancton
+                        boolean esperanza2;
+                        for(int j = 1;j<1000000;j++){
+                            esperanza2 = comeKyP(depredador);
+                            if(!esperanza2){
+                                return false;   //si n ose los come todos morira
+                            }
+                        }
+                        return true; //si se los come todos seguira vivo
+                }                
+            }
+            
+        }
+        
+       //si no encuentra el animal es que no hay más para comerse, entonces el depredador que se queria alimentar muere
+       animales.remove(depredador);
+       return false;
+       /*for(serVivo v : aux){
+           if((v.raza==depredador)&&(salir==false)){
+               salir = true;
+               animales.remove(v);
+           }
+       }*/
+    
+
+public boolean comeKyP(serVivo depredador){
+    ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+    //gracias a los return solo se come uno si puede cada vez que se llama a esta funcion
+        for (serVivo i : aux) {     //recorremos todos los animales
+            if(i.raza.equals("kyp")){
+                ((kyp)i).num = ((kyp)i).num - 1000000;
+                if(((kyp)i).num ==0){
+                    animales.remove(i);                    
+                }                
+                return true;
+            }
+        }
+        //si no encuentra mas krill o plankton es que no hay más para comerse, entonces el depredador que se queria alimentar muere
+        animales.remove(depredador);
+        return false;
+       /*for(serVivo v : aux){
+           if((v.raza==depredador)&&(salir==false)){
+               salir = true;
+               animales.remove(v);
+           }
+       }*/
+    }
+
+    
     public ArrayList<String> toString(String raza) {
         ArrayList<String> f = new ArrayList<String>();
         for (serVivo i : animales) {
