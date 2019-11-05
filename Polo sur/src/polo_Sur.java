@@ -106,9 +106,7 @@ public boolean pasar10dias() {
     public void crearkyp() {
         int n;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);          //i es solo para explorar el for
-        n = n * 1000000000;                                          //metemos el numero de esquimales iniciales en nç
-        System.out.println(n);
-        animales.add(new kyp(dia, 0, 0, 0, n));
+        animales.add(new kyp(dia, 0, 0, 0, n));           //metemos el numero de esquimales iniciales en n
     }
 
     public void calentamientoGlobal() {
@@ -173,34 +171,11 @@ public boolean pasar10dias() {
 
     public void reproducirKYP() {
         if (temperatura < 5.5 && temperatura >= 5.0) {
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 12));
         } else if (temperatura < 5.0 && temperatura >= 4.0) {
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 22));
         } else if (temperatura < 4.0 && temperatura >= 3.0) {
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
-            animales.add(new kyp(dia, 0, 0, 0, 2000000000));
+            animales.add(new kyp(dia, 0, 0, 0, 18));
         }
     }
 
