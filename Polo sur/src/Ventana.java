@@ -1,3 +1,4 @@
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ public class Ventana extends JFrame implements ActionListener {
     JButton caza = new JButton("Caza furtiva");
     JButton salir = new JButton("Salir de la aplicacion");
     polo_Sur polo;
+    boolean calentado, cazado;
 
     public Ventana(String titulo) {
         super(titulo);
@@ -55,15 +57,19 @@ public class Ventana extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "crear":
+                calentado = false;
+                cazado = false;
                 polo = new polo_Sur();
                 JOptionPane.showMessageDialog(new JFrame(), "Polo sur creado con dia " + polo.dia);
                 break;
 
             case "dia":
+                calentado = false;
+                cazado = false;
                 if (polo != null) {
-                    if(!polo.diaAdia()){
+                    if (!polo.diaAdia()) {
                         JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
-                    }else{
+                    } else {
                         System.exit(0);
                     }
                 } else {
@@ -72,10 +78,12 @@ public class Ventana extends JFrame implements ActionListener {
                 break;
 
             case "10 dias":
+                calentado = false;
+                cazado = false;
                 if (polo != null) {
-                    if(!polo.pasar10dias()){
+                    if (!polo.pasar10dias()) {
                         JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
-                    }else{
+                    } else {
                         System.exit(0);
                     }
                 } else {
@@ -92,9 +100,22 @@ public class Ventana extends JFrame implements ActionListener {
                     aux.add(" ");
                     aux.add("El dia es: " + polo.dia);
                     aux.add(" ");
-                    aux.add("La temperatura es: "+polo.temperatura+" grados.");
+                    aux.add("La temperatura es: " + polo.temperatura + " grados.");
+                    if (calentado == true || cazado == true) {
+                        aux.add(" ");
+                        aux.add("Estos son los catastrofes que han ocurrido");
+                        if (calentado == true) {
+                            aux.add("Subio las temperaturas por el calentamiento global");
+                        }
+                        if (cazado == true) {
+                            aux.add("Aparecieron unos cazadores furtivos");
+                        }
+                    }else{
+                        aux.add(" ");
+                        aux.add("No hubo ninguna catastrofe");
+                    }
                     aux.add(" ");
-                    aux.add("El numero de kyp es: "+polo.contarKYP()+"000000000");
+                    aux.add("El numero de kyp es: " + polo.contarKYP() + "000000000");
                     aux.add(" ");
                     aux.add("Raza Esquimal: " + polo.contarRaza("esquimal"));
                     aux.addAll(polo.toString("esquimal"));
@@ -131,6 +152,7 @@ public class Ventana extends JFrame implements ActionListener {
 
             case "cazar":
                 if (polo != null) {
+                    cazado = true;
                     polo.cazaFurtiva();
                     JOptionPane.showMessageDialog(new JFrame(), "caza furtiva realizada ");
                 } else {
@@ -140,6 +162,7 @@ public class Ventana extends JFrame implements ActionListener {
 
             case "calentar":
                 if (polo != null) {
+                    calentado = true;
                     polo.calentamientoGlobal();
                     JOptionPane.showMessageDialog(new JFrame(), "Temperatura sube a " + polo.temperatura);
                 } else {
