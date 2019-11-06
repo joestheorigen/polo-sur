@@ -60,27 +60,27 @@ public boolean pasar10dias() {
 
     public void crearOsos() {
         int n, i, masa;                                                    //en n ira el numero de oso que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (28 - 22 + 1) + 22);          //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (27 - 22 + 1) + 22);          //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
-            masa = (int) Math.floor(Math.random() * (55 - 40 + 1) + 40);
+            masa = (int) Math.floor(Math.random() * (54 - 40 + 1) + 40);
             animales.add(new oso(dia, masa, (float) (153.0 / 1000.0), (float) (95.0 / 1000.0)));
         }
     }
 
     public void crearMorsas() {
         int n, i, masa;                                                    //en n ira el numero de morsas que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (48 - 42 + 1) + 42);          //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (47 - 42 + 1) + 42);          //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
-            masa = (int) Math.floor(Math.random() * (42 - 30 + 1) + 30);
+            masa = (int) Math.floor(Math.random() * (41 - 30 + 1) + 30);
             animales.add(new morsa(dia, masa, (float) (98.0 / 1000.0), (float) (95.0 / 1000.0)));
         }
     }
 
     public void crearFocas() {
         int n, i, masa;                                                    //en n ira el numero de focas que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (290 - 260 + 1) + 260);       //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (289 - 260 + 1) + 260);       //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
-            masa = (int) Math.floor(Math.random() * (32 - 25 + 1) + 25);
+            masa = (int) Math.floor(Math.random() * (31 - 25 + 1) + 25);
             animales.add(new foca(dia, masa, (float) (100.0 / 1000.0), (float) (90.0 / 1000.0)));
         }
     }
@@ -89,10 +89,10 @@ public boolean pasar10dias() {
         Random r = new Random();
         float aux;                                                         //en aux tendremos el numero aleatorio para elegir el tipo de pez
         int n, i, masa;                                                    //en n ira el numero de peces que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (8000 - 7000 + 1) + 7000);    //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (7999 - 7000 + 1) + 7000);    //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
             aux = r.nextFloat();
-            masa = (int) Math.floor(Math.random() * (70 - 55 + 1) + 55);
+            masa = (int) Math.floor(Math.random() * (69 - 55 + 1) + 55);
             if (aux <= 0.33) {
                 animales.add(new pez(dia, masa, (float) (185.0 / 1000.0), (float) (163.0 / 1000.0), "bacalao"));
             } else if (aux <= 0.66) {
@@ -105,7 +105,7 @@ public boolean pasar10dias() {
 
     public void crearkyp() {
         int n;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);          //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (74 - 65 + 1) + 65);          //i es solo para explorar el for
         animales.add(new kyp(dia, 0, 0, 0, n));           //metemos el numero de esquimales iniciales en n
     }
 
@@ -245,8 +245,6 @@ public boolean pasar10dias() {
         }
     }
 
-//IMPLEMENTAR METODO
-    //DEBO HACER MEJOR LO DE QUE SI NO ENCUENTRA UN PEZ INTENTE CAZAR OTRO
     public void comer() {                                                   //cuando un animal come mueren otros animales
         Random r = new Random();                                            //creamos un random que va de 0.00 a 1.00 para ver cuanto comerá el animal
         float x; //la usamos para almacenar el numero random
@@ -515,7 +513,6 @@ public boolean pasar10dias() {
         serVivo masPequeno = new esquimal(0, 1000000, 0.0f, 0.0f);  //lo usaremos para comparar los pesos entre los animales, si un esquimal, era por darles uso
         boolean puedeComer = false; //al principio a fasle porque no sabemos si podra comer
         if(comido.equals("pez")){          //como hay tres tipos de peces deberemos sacar el mas pequeno pero de entre todas las razas
-            System.out.println("Puedo comer pez");
             for (serVivo i : aux) {     //recorremos todos los animales
                 if(i.raza.equals("bacalao")){   //si es bacalao cuenta como pez
                     puedeComer = true;  //con que encuentre uno de la raza que quiere comer sera true que ha comido                    
@@ -541,7 +538,6 @@ public boolean pasar10dias() {
             }
         }
         else if(comido.equals("kyp")){
-            System.out.println("Puedo comer kyp");
             boolean estoyComiendo;  //para comprobar si puede tomarse toda su racion de krill y plankton
             estoyComiendo = comeKyP(depredador);    //comer 1 es como comer 1000000 de Kyp
             if(!estoyComiendo){ //si en algun momento no queda Krill ni plankton y no puede comer todo lo que debia
@@ -562,68 +558,12 @@ public boolean pasar10dias() {
             }
         }
         if(puedeComer){ //si ha podido comer
-            System.out.println("he comido");
             animales.remove(masPequeno); //pues se come al mas pequeno
             return true;    //y el depredador puede vivir un poco mas
         }
-        System.out.println("me muero");
         animales.remove(depredador);  //si no ha comido muere
         return false;  //y devuelve false
     }
-/*        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
-        int peso = 0;
-        for (serVivo i : aux) {     //recorremos todos los animales
-            if(i.raza == comido){   //si encontramos uno de la raza que queremos comer
-            //gracias a los return solo se come uno si puede cada vez que se llama al metodo
-                switch (i.raza) {
-                    case "esquimal":    //comemos esquimal
-                        for(int j=1;;j++){              //primero debemos sacar el que menos masa tiene
-                         animales.remove(i); //despues nos lo comemos   
-                         if (j.masaMuscular)return true;
-                        }                        
-                        
-                    case "oso":         //comemos oso
-                        animales.remove(i);
-                        return true;
-                    case "morsa":       //comemos morsa
-                        animales.remove(i);
-                        return true;                        
-                    case "foca":        //comemos foca
-                        animales.remove(i);
-                        return true;
-                    case "bacalao":     //comemos bacalao                        
-                            animales.remove(i);                        
-                        return true;
-                    case "raya":
-                        animales.remove(i);
-                        return true;
-                    case "merluza negra":                        
-                        animales.remove(i);
-                        return true;
-                    case "Kypl":        //si comemos Krill y plancton
-                        boolean esperanza2;
-                        for(int j = 1;j<1000000;j++){
-                            esperanza2 = comeKyP(depredador);
-                            if(!esperanza2){
-                                return false;   //si n ose los come todos morira
-                            }
-                        }
-                        return true; //si se los come todos seguira vivo
-                }                
-            }
-            
-        }
-        
-       //si no encuentra el animal es que no hay más para comerse, entonces el depredador que se queria alimentar muere
-       animales.remove(depredador);
-       return false;
-       /*for(serVivo v : aux){
-           if((v.raza==depredador)&&(salir==false)){
-               salir = true;
-               animales.remove(v);
-           }
-       }*/
-    
 
 public boolean comeKyP(serVivo depredador){
     ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
@@ -640,12 +580,6 @@ public boolean comeKyP(serVivo depredador){
         //si no encuentra mas krill o plankton es que no hay más para comerse, entonces el depredador que se queria alimentar muere
         animales.remove(depredador);
         return false;
-       /*for(serVivo v : aux){
-           if((v.raza==depredador)&&(salir==false)){
-               salir = true;
-               animales.remove(v);
-           }
-       }*/
     }
 
     
