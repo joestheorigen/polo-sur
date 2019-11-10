@@ -2,15 +2,23 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Ventana extends JFrame implements ActionListener {
 
-    JButton crear = new JButton("Crear nuevo polo");
+    JButton crear = new JButton("Crear nuevo polo");    
+    JButton continuar = new JButton("Continuar");
     JButton pasarDia = new JButton("Pasar 1 dia");
     JButton pasar10Dias = new JButton("Pasar 10 dias");
     JButton detalles = new JButton("Detalles del dia actual");
@@ -19,21 +27,33 @@ public class Ventana extends JFrame implements ActionListener {
     JButton salir = new JButton("Salir de la aplicacion");
     polo_Sur polo;
     boolean calentado, cazado;
-
-    public Ventana(String titulo) {
+    String archivoA = "C:/Users/Damian/Desktop/ArchivosP3IS2/animales";
+    String archivoDP = "C:/Users/Damian/Desktop/ArchivosP3IS2/DiaTemperaturaCatastrofes.txt";
+   
+    public Ventana(String titulo) throws IOException, ClassNotFoundException {
         super(titulo);
-
+        
         this.setLayout(new FlowLayout());
 
         crear.addActionListener(this);
+        continuar.addActionListener(this);
         pasarDia.addActionListener(this);
         pasar10Dias.addActionListener(this);
         detalles.addActionListener(this);
         calentar.addActionListener(this);
         caza.addActionListener(this);
         salir.addActionListener(this);
-
+        
+        //OH NO, NO LO HE CONSEGUIDO
+        crear.setIcon(new ImageIcon("C:/Users/Damian/Desktop/ArchivosP3IS2/polo_sur"));
+        pasarDia.setIcon(new ImageIcon("C:/Users/Damian/Desktop/ArchivosP3IS2/polo_sur"));
+        pasar10Dias.setIcon(new ImageIcon("C:/Users/Damian/Desktop/ArchivosP3IS2/polo_sur"));
+        detalles.setIcon(new ImageIcon("C:/Users/Damian/Desktop/ArchivosP3IS2/polo_sur"));
+        calentar.setIcon(new ImageIcon("C:/Users/Damian/Desktop/ArchivosP3IS2/polo_sur"));
+        crear.setIconTextGap(ICONIFIED);
+        
         crear.setActionCommand("crear");
+        continuar.setActionCommand("continuar");
         pasarDia.setActionCommand("dia");
         pasar10Dias.setActionCommand("10 dias");
         detalles.setActionCommand("detalles");
@@ -42,6 +62,7 @@ public class Ventana extends JFrame implements ActionListener {
         salir.setActionCommand("salir");
 
         this.add(crear);
+        this.add(continuar);
         this.add(pasarDia);
         this.add(pasar10Dias);
         this.add(detalles);
@@ -50,7 +71,8 @@ public class Ventana extends JFrame implements ActionListener {
         this.add(salir);
 
         this.setVisible(true);
-        this.setSize(300, 175);
+        //this.setSize(300, 175);
+        this.setSize(325, 200);
     }
 
     @Override
@@ -169,7 +191,57 @@ public class Ventana extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
                 break;
+            case "continuar":
+        {
+            try {
+                //Comprobamos si los archivos estan vacios
+                //si no estan vacios
+                File archivoAnimales = new File(archivoA); //ponga aquí la ruta del archivo
+                File archivoDatosPolo = new File(archivoDP); //ponga aquí la ruta del archivo
+                if ((!archivoAnimales.exists())||(!archivoDatosPolo.exists())) {
+                    JOptionPane.showMessageDialog(new JFrame(),"OH NO, NO EXISTE EL FICHERO DONDE SE GUARDAN LOS DATOS DEL POLO");
+                    JOptionPane.showMessageDialog(new JFrame(),"Mire el archivo IMPORTANTE y siga sus instrucciones por favor");
+                    break;
+                }                
+                JOptionPane.showMessageDialog(new JFrame(), "Continuamos el polo por donde nos quedamos");
+                int nCatastrofes;
+                calentado = false;                                              //lo inicializamos a false
+                cazado = false;                                                 //lo inicializamos a false
+                polo = new polo_Sur();                                          //creamos un polo para poder llamar a la funcion continuar
+                nCatastrofes = polo.continuar(archivoA, archivoDP);                        //abrimos los ficheros y metemos sus valores en variables
+                if(nCatastrofes == 1){
+                    calentado = true;
+                }
+                else if(nCatastrofes == 2){
+                    cazado = true;
+                }
+                else if(nCatastrofes == 3){
+                    calentado = true;
+                    cazado = true;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            break;
+        }
+    
             case "salir":
+        {
+            if (polo == null) {
+                    JOptionPane.showMessageDialog(new JFrame(), "No hay polo por lo que no guardare sus datos");
+                }          
+            else{
+            try {
+                JOptionPane.showMessageDialog(new JFrame(), "Oh vaya, veo que tienes datos de un polo a medio, permitame guardarlos");
+                polo.guardarDatos(calentado, cazado, archivoA, archivoDP);
+                JOptionPane.showMessageDialog(new JFrame(), "Datos guardados satisfactoriamente");
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            }
+        }
                 System.exit(0);
                 break;
         }

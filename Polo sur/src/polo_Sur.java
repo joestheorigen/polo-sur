@@ -1,15 +1,42 @@
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
+/**
+ *
+ * @author Damian
+ */
 public class polo_Sur {
-
+    FileReader fileR;
+    FileWriter fileW;
+    BufferedReader lineafileR;
+    BufferedWriter lineafileW;
+    StringTokenizer token;
     ArrayList<serVivo> animales = new ArrayList<serVivo>();
     double temperatura;
     int dia;
 
+    /**
+     *
+     */
     public polo_Sur() {
         dia = 1;
         temperatura = 4;
@@ -21,6 +48,10 @@ public class polo_Sur {
         crearkyp();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean diaAdia() {
         dia++;
         cambiarTemperatura();
@@ -34,6 +65,10 @@ public class polo_Sur {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean pasar10dias() {
         for (int i = 0; i < 10; i++) {
             dia++;
@@ -49,6 +84,9 @@ public class polo_Sur {
         return false;
     }
 
+    /**
+     *
+     */
     public void crearEsquimales() {
         int n, i, masa;                                                    //en n ira el numero de esquimales que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (14 - 12 + 1) + 12);          //i es solo para explorar el for
@@ -58,6 +96,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void crearOsos() {
         int n, i, masa;                                                    //en n ira el numero de oso que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (27 - 22 + 1) + 22);          //i es solo para explorar el for
@@ -67,6 +108,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void crearMorsas() {
         int n, i, masa;                                                    //en n ira el numero de morsas que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (47 - 42 + 1) + 42);          //i es solo para explorar el for
@@ -76,6 +120,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void crearFocas() {
         int n, i, masa;                                                    //en n ira el numero de focas que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (289 - 260 + 1) + 260);       //i es solo para explorar el for
@@ -85,6 +132,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void crearPeces() {
         Random r = new Random();
         float aux;                                                         //en aux tendremos el numero aleatorio para elegir el tipo de pez
@@ -103,16 +153,25 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void crearkyp() {
         int n;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
         n = (int) Math.floor(Math.random() * (74 - 65 + 1) + 65);          //i es solo para explorar el for
         animales.add(new kyp(dia, 0, 0, 0, n));           //metemos el numero de esquimales iniciales en n
     }
 
+    /**
+     *
+     */
     public void calentamientoGlobal() {
         temperatura = temperatura + 2;
     }
 
+    /**
+     *
+     */
     public void cazaFurtiva() {
         Random r = new Random();
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
@@ -125,6 +184,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void reproducir() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
@@ -169,6 +231,9 @@ public class polo_Sur {
         reproducirKYP();
     }
 
+    /**
+     *
+     */
     public void reproducirKYP() {
         if (temperatura < 5.5 && temperatura >= 5.0) {
             animales.add(new kyp(dia, 0, 0, 0, 12));
@@ -179,6 +244,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void muerteInesperada() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
@@ -222,6 +290,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void cambiarTemperatura() {
         Random r = new Random();
         if (temperatura >= 5.0) {
@@ -245,41 +316,28 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void comer() {                                                   //cuando un animal come mueren otros animales
         Random r = new Random();                                            //creamos un random que va de 0.00 a 1.00 para ver cuanto comerá el animal
-        float x;                                                            //la usamos para almacenar el numero random
+        int cantidad;                                                       //la usamos para saber la cantidad a comer
         int j;                                                              //la usamos para recorrer los for
         boolean esperanza;                                                  // si es true es que ha podido comer y esta vivo,
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();     //si es false es que no ha podido comer y esta muerto
         for (serVivo i : aux) {                                             //gracias a aux podemos exploarar todos los animales
             switch (i.raza) {                                               //aqui miramos que raza va a alimentarse
                 case "esquimal":                                            //si se alimenta el esquimal
-                    x = r.nextFloat();   //primero vemos cuantos peces comera
-                    if (x <= 0.33) {
-                        for (j = 1; j <= 2; j++) {      //comera 2 peces
+                    cantidad=((esquimal)i).comerPeces();                    //alamacenamos cuantos peces comerá
+                    for (j = 1; j <= cantidad; j++) {      //con este bucle se comerá los peces
                             esperanza = esComido("pez", i);
                             if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
                                 break;     //si ha muerto el depredador sale del switch
                             }
-
-                        }
-                    } else if (x <= 0.66) {
-                        for (j = 1; j <= 3; j++) {      //comera 3 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else {
-                        for (j = 1; j <= 4; j++) {      //comera 4 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
                     }
-                    x = r.nextFloat();  //ahora vemos cuantas focas comera
-                    if (x > 0.50) {                     //hay un 50% de probabilidades de que coma una foca, si no no comera foca
+                    
+                    cantidad=((esquimal)i).comerFocas();              //ahora vemos si come foca o no
+                    for (j = 1; j <= cantidad; j++) { 
                         esperanza = esComido("foca", i);
                         if (!esperanza) {
                             break;
@@ -287,194 +345,81 @@ public class polo_Sur {
                     }
                     break;
                 case "oso":                                                 //si se alimenta el oso
-                    x = r.nextFloat();   //primero vemos cuantas focas comera
-                    if (x <= 0.50) {                    //Se comera una 
+                    cantidad=((oso)i).comerFocas();              //ahora vemos cuantas focas come
+                    for (j = 1; j <= cantidad; j++) { 
                         esperanza = esComido("foca", i);
                         if (!esperanza) {
                             break;
                         }
-                    } else {
-                        for (j = 1; j <= 2; j++) {      //se comera 2 focas
-                            esperanza = esComido("foca", i);
-                            if (!esperanza) {
-                                break;
-                            }
-                        }
                     }
-                    x = r.nextFloat();  //ahora vemos cuantos peces se come
-                    if (x <= 0.16) {
-                        for (j = 1; j <= 10; j++) {     //se comera 10 peces
+                    cantidad=((oso)i).comerPeces();                    //alamacenamos cuantos peces comerá
+                    for (j = 1; j <= cantidad; j++) {      //con este bucle se comerá los peces
                             esperanza = esComido("pez", i);
                             if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
                                 break;     //si ha muerto el depredador sale del switch
                             }
-                        }
-
-                    } else if (x <= 0.33) {
-                        for (j = 1; j <= 11; j++) {     //se comera 11 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else if (x <= 0.50) {
-                        for (j = 1; j <= 12; j++) {     //se comera 12 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else if (x <= 0.66) {
-                        for (j = 1; j <= 13; j++) {     //se comera 13 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else if (x <= 0.83) {
-                        for (j = 1; j <= 14; j++) {     //se comera 14 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else {
-                        for (j = 1; j <= 15; j++) {     //se comera 15 peces
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
                     }
                     break;
                 case "morsa":                                               //si se alimenta la morsa
-                    x = r.nextFloat();   //primero vemos cuantas focas comera
-                    if (x <= 0.50) {                    //Se comera una 
+                    cantidad=((morsa)i).comerFocas();              //ahora vemos cuantas focas come
+                    for (j = 1; j <= cantidad; j++) { 
                         esperanza = esComido("foca", i);
                         if (!esperanza) {
                             break;
                         }
-                    } else {
-                        for (j = 1; j <= 2; j++) {      //se comera 2 focas
-                            esperanza = esComido("foca", i);
-                            if (!esperanza) {
-                                break;
-                            }
-                        }
                     }
-                    x = r.nextFloat();   //primero vemos cuantos osos comera
-                    if ((x < 0.33)) {    //Se comera uno 
+                    cantidad=((morsa)i).comerOsos();              //ahora vemos cuantos oso come
+                    for (j = 1; j <= cantidad; j++) { 
                         esperanza = esComido("oso", i);
                         if (!esperanza) {
                             break;
                         }
-                    } else if (x < 0.66) {            //Se comera 2
-                        for (j = 1; j <= 2; j++) {
-                            esperanza = esComido("oso", i);
-                            if (!esperanza) {
-                                break;
-                            }
-                        }
                     }
                     break;
                 case "foca":                                                //si se alimenta la foca
-                    x = r.nextFloat();   //primero vemos cuantos peces comera
-                    if (x <= 0.16) {                    //Se comera una 
-                        for (j = 1; j <= 15; j++) {     //se come 15 pescados
+                    cantidad=((foca)i).comerPeces();                    //alamacenamos cuantos peces comerá
+                    for (j = 1; j <= cantidad; j++) {      //con este bucle se comerá los peces
                             esperanza = esComido("pez", i);
                             if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
                                 break;     //si ha muerto el depredador sale del switch
                             }
-                        }
-                    } else if (x <= 0.33) {
-                        for (j = 1; j <= 16; j++) {     //se come 16 pescados
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else if (x <= 0.50) {
-                        for (j = 1; j <= 17; j++) {     //se come 17 pescados
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else if (x <= 0.66) {
-                        for (j = 1; j <= 18; j++) {     //se come 18 pescados
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else if (x <= 0.83) {
-                        for (j = 1; j <= 19; j++) {     //se come 19 pescados
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
-                    } else {
-                        for (j = 1; j <= 20; j++) {     //se come 20 pescados
-                            esperanza = esComido("pez", i);
-                            if (!esperanza) { //si es false es que ha muerto el depredador al no poder comer
-                                break;     //si ha muerto el depredador sale del switch
-                            }
-                        }
                     }
                     break;
                 case "bacalao":                                             //si se alimenta el bacalao
-                    x = r.nextFloat();
-                    if (x <= 50) {
-                        esperanza = esComido("kyp", i);
-                        if (!esperanza) {
-                            break;
-                        }
-                    } else {
-                        for (j = 1; j <= 2; j++) {
+                    cantidad=((pez)i).comerKrillPlankton();
+                    for (j = 1; j <= cantidad; j++) {
                             esperanza = esComido("kyp", i);
                             if (!esperanza) {
                                 break;
                             }
-                        }
-                    }
+                    }                    
                     break;
                 case "raya":                                                //si se alimenta la raya
-                    x = r.nextFloat();
-                    if (x <= 50) {
-                        esperanza = esComido("kyp", i);
-                        if (!esperanza) {
-                            break;
-                        }
-                    } else {
-                        for (j = 1; j <= 2; j++) {
+                    cantidad=((pez)i).comerKrillPlankton();
+                    for (j = 1; j <= cantidad; j++) {
                             esperanza = esComido("kyp", i);
                             if (!esperanza) {
                                 break;
                             }
-                        }
                     }
                     break;
                 case "merluza negra":                                       //si se alimenta la merluza negra
-                    x = r.nextFloat();
-                    if (x <= 50) {
-                        esperanza = esComido("kyp", i);
-                        if (!esperanza) {
-                            break;
-                        }
-                    } else {
-                        for (j = 1; j <= 2; j++) {
+                    cantidad=((pez)i).comerKrillPlankton();
+                    for (j = 1; j <= cantidad; j++) {
                             esperanza = esComido("kyp", i);
                             if (!esperanza) {
                                 break;
                             }
-                        }
                     }
                     break;
             }
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean mundoMuerto() {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
@@ -489,6 +434,12 @@ public class polo_Sur {
         return true;
     }
 
+    /**
+     *
+     * @param comido
+     * @param depredador
+     * @return
+     */
     public boolean esComido(String comido, serVivo depredador) {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         int pesoMasPequeno = Integer.MAX_VALUE;
@@ -543,6 +494,11 @@ public class polo_Sur {
         return false;  //y devuelve false
     }
 
+    /**
+     *
+     * @param depredador
+     * @return
+     */
     public boolean comeKyP(serVivo depredador) {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         //gracias a los return solo se come uno si puede cada vez que se llama a esta funcion
@@ -560,6 +516,11 @@ public class polo_Sur {
         return false;
     }
 
+    /**
+     *
+     * @param raza
+     * @return
+     */
     public ArrayList<String> toString(String raza) {
         ArrayList<String> f = new ArrayList<String>();
         for (serVivo i : animales) {
@@ -570,6 +531,11 @@ public class polo_Sur {
         return f;
     }
 
+    /**
+     *
+     * @param raza
+     * @return
+     */
     public int contarRaza(String raza) {
         int j = 0;
         for (serVivo i : animales) {
@@ -580,6 +546,10 @@ public class polo_Sur {
         return j;
     }
 
+    /**
+     *
+     * @return
+     */
     public int contarKYP() {
         int j = 0;
         for (serVivo i : animales) {
@@ -588,5 +558,81 @@ public class polo_Sur {
             }
         }
         return j;
+    }
+
+    /**
+     *
+     * @param calentado
+     * @param cazado
+     * @throws IOException
+     */
+    public void guardarDatos(boolean calentado, boolean cazado, String archivoA, String archivoDP) throws IOException{
+        //guardamos los animales en un fichero
+        ObjectOutputStream oos;        
+        File archivoAnimales = new File(archivoA);   //ponemos la ruta donde escribir
+        oos = new ObjectOutputStream(new FileOutputStream(archivoAnimales));            
+        oos.writeObject(animales);                                              //escribimos los animales
+        oos.close();
+        //ahora guardamos en otro fichero el dia, la temperatura y las catastrofes del polo
+        fileW = new FileWriter(archivoDP);
+        lineafileW = new BufferedWriter(fileW);
+        fileW.write("Dia");
+        fileW.write("		");
+        fileW.write("Temperatura");
+        fileW.write("		");
+        fileW.write("Calentado");
+        fileW.write("		");
+        fileW.write("Cazado");
+        fileW.write("\n");
+        fileW.write(String.valueOf(dia));
+        fileW.write("		");
+        fileW.write(String.valueOf(temperatura));
+        fileW.write("			");
+        fileW.write(String.valueOf(calentado));
+        fileW.write("     		");
+        fileW.write(String.valueOf(cazado));
+        lineafileW.close();                                     // los cerramos por si acaso
+	fileW.close();            
+    }
+    
+    /**
+     *
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public int continuar(String archivoA, String archivoDP) throws IOException, ClassNotFoundException{
+        //Primero metemos en animales los animales del fichero
+        int num = 0;                //cada numero implacara una catastrofe diferente, el cual devolveremos por el return:
+                                    //0 = ninguna catastrofe
+                                    //1 = calentamiento global
+                                    //2 = caza furtiva
+                                    //3 = calentamiento global y caza furtiva
+        ObjectInputStream ois;
+        String ayudante;
+        File archivoAnimales = new File(archivoA);   //ponemos la ruta de donde sacaremos los animales
+        ois = new ObjectInputStream(new FileInputStream(archivoAnimales));
+        serVivo[] aux;
+        ArrayList<serVivo> animalesAux = new ArrayList<serVivo>();      //creamos un auxiliar para luego guardar los animales del fichero
+        animales = ((ArrayList<serVivo>)ois.readObject());                     //metemos los animales en el auxiliar
+        ois.close();
+        fileR = new FileReader(archivoDP);
+	lineafileR = new BufferedReader(fileR);
+        String linea;
+	lineafileR.readLine();
+        while((linea = lineafileR.readLine())!=null) {
+          token =new StringTokenizer(linea);
+          dia = Integer.parseInt(token.nextToken());
+          temperatura = Double.parseDouble(token.nextToken());
+          if(Boolean.parseBoolean(token.nextToken()) == true){
+            num = num + 1; 
+          }
+          if(Boolean.parseBoolean(token.nextToken()) == true){
+            num = num + 2; 
+          }          
+        }        
+	lineafileR.close();                                     // los cerramos por si acaso
+	fileR.close();	        
+        return num;                                             //devolvemos el identificador de catastrofes
     }
 }
