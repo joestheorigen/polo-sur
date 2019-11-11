@@ -10,11 +10,11 @@ public class foca extends serVivo {
         float i;
         Random r = new Random();
         i = r.nextFloat();
-        if (i <= 0.80) {
+        if (i <= 0.90) {
             return 15;
-        } else if (i <= 0.85) {
+        } else if (i <= 0.91) {
             return 16;
-        } else if (i <= 0.90) {
+        } else if (i <= 0.92) {
             return 17;
         } else if (i <= 0.93) {
             return 18;

@@ -32,6 +32,8 @@ public class polo_Sur {
         crearkyp();
         cazado = false;
         calentado = false;
+        terremoto = false;
+        guerra = false;
     }
 
     /**
@@ -42,6 +44,8 @@ public class polo_Sur {
         dia++;
         cazado = false;
         calentado = false;
+        terremoto = false;
+        guerra = false;
         cambiarTemperatura();
         comer();
         reproducir();
@@ -62,6 +66,8 @@ public class polo_Sur {
             dia++;
             cazado = false;
             calentado = false;
+            terremoto = false;
+            guerra = false;
             cambiarTemperatura();
             comer();
             reproducir();
@@ -165,7 +171,7 @@ public class polo_Sur {
      */
     public void cazaFurtiva() {
         Random r = new Random();
-        cazado=true;
+        cazado = true;
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             if (i instanceof oso && r.nextFloat() <= 0.15) {
@@ -175,29 +181,31 @@ public class polo_Sur {
             }
         }
     }
+
     public void terremoto() {
         Random r = new Random();
-        terremoto=true;
+        terremoto = true;
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             if (i instanceof oso && r.nextFloat() <= 0.30) {
                 animales.remove(i);
-            } else if (i instanceof morsa && r.nextFloat() <= 0.50) {
+            } else if (i instanceof morsa && r.nextFloat() <= 0.40) {
                 animales.remove(i);
-            }else if (i instanceof foca && r.nextFloat() <= 0.35) {
+            } else if (i instanceof foca && r.nextFloat() <= 0.35) {
                 animales.remove(i);
-            }else if (i instanceof pez && r.nextFloat() <= 0.10) {
+            } else if (i instanceof pez && r.nextFloat() <= 0.10) {
                 animales.remove(i);
-            }else if (i instanceof esquimal && r.nextFloat() <= 0.32) {
+            } else if (i instanceof esquimal && r.nextFloat() <= 0.32) {
                 animales.remove(i);
-            }else if (i instanceof kyp && r.nextFloat() <= 0.20) {
+            } else if (i instanceof kyp && r.nextFloat() <= 0.70) {
                 animales.remove(i);
             }
         }
     }
+
     public void guerra() {
         Random r = new Random();
-        guerra=true;
+        guerra = true;
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             if (i instanceof esquimal && r.nextFloat() <= 0.50) {

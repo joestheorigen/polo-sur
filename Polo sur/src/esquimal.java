@@ -9,9 +9,9 @@ public class esquimal extends serVivo{
         float i;
         Random r = new Random();
         i=r.nextFloat();
-            if(i<=0.33){
+            if(i<=0.90){
                 return 2;
-            }else if(i<=0.66){
+            }else if(i<=0.95){
                 return 3;
             }else{
                 return 4;

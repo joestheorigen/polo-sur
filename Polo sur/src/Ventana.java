@@ -13,6 +13,6 @@ public class Ventana extends JFrame {
         this.add(new Panel());
 
         this.setVisible(true);
-        this.setSize(1000, 500);
+        this.setSize(800, 400);
     }
 }

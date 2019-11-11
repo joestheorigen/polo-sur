@@ -31,16 +31,13 @@ public class Panel extends JPanel implements ActionListener {
     JButton guerra = new JButton("Guerra");
     JButton salir = new JButton(new ImageIcon("puerta.png"));
     polo_Sur polo = new polo_Sur();
-    boolean calentado, cazado;
 
     public Panel() throws IOException, ClassNotFoundException {
 
         this.setLayout(new GridLayout(4,3));
         
         cargarDatos();
-        
-        
-        
+
         crear.addActionListener(this);
         pasarDia.addActionListener(this);
         pasar10Dias.addActionListener(this);
@@ -226,14 +223,14 @@ public class Panel extends JPanel implements ActionListener {
             
             case "guerra":
                 if (polo != null) {                    
-                    if(polo.contarRaza("esquimal")!=0){                         //si hay esquimales
-                        polo.guerra();                                          //hay guerra
+                    if(polo.contarRaza("esquimal")>1){                         
+                        polo.guerra();                                          
                         JOptionPane.showMessageDialog(new JFrame(), "Los esquimales han sufrido una guerra");   
                     }
-                    else{                                                       //si no, no hay guerra
-                        JOptionPane.showMessageDialog(new JFrame(), "Sin esquimales no hay guerra, lo siento");
+                    else{                                                       
+                        JOptionPane.showMessageDialog(new JFrame(), "No hay esquimales para una guerra");
                     }
-                } else {                                                        //si no se creo el polo se avisa
+                } else {                                                        
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
                 break;
