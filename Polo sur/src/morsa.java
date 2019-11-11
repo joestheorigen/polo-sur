@@ -17,13 +17,13 @@ public class morsa extends serVivo {
         }
     }
 
-    public int comerOsos() {
+    public int comerOsos() {        //lo hemos nerfeado porque comian mucho oso
         float i;
         Random r = new Random();
         i = r.nextFloat();
-        if (i <= 0.33) {
+        if (i <= 0.85) {
             return 0;
-        } else if (i <= 0.66) {
+        } else if (i <= 0.95) {
             return 1;
         } else {
             return 2;

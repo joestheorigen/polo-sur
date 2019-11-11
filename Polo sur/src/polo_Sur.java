@@ -15,6 +15,8 @@ public class polo_Sur {
     int dia;
     boolean calentado;
     boolean cazado;
+    boolean terremoto;
+    boolean guerra;
 
     /**
      *
@@ -169,6 +171,36 @@ public class polo_Sur {
             if (i instanceof oso && r.nextFloat() <= 0.15) {
                 animales.remove(i);
             } else if (i instanceof morsa && r.nextFloat() <= 0.20) {
+                animales.remove(i);
+            }
+        }
+    }
+    public void terremoto() {
+        Random r = new Random();
+        terremoto=true;
+        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+        for (serVivo i : aux) {
+            if (i instanceof oso && r.nextFloat() <= 0.30) {
+                animales.remove(i);
+            } else if (i instanceof morsa && r.nextFloat() <= 0.50) {
+                animales.remove(i);
+            }else if (i instanceof foca && r.nextFloat() <= 0.35) {
+                animales.remove(i);
+            }else if (i instanceof pez && r.nextFloat() <= 0.10) {
+                animales.remove(i);
+            }else if (i instanceof esquimal && r.nextFloat() <= 0.32) {
+                animales.remove(i);
+            }else if (i instanceof kyp && r.nextFloat() <= 0.20) {
+                animales.remove(i);
+            }
+        }
+    }
+    public void guerra() {
+        Random r = new Random();
+        guerra=true;
+        ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
+        for (serVivo i : aux) {
+            if (i instanceof esquimal && r.nextFloat() <= 0.50) {
                 animales.remove(i);
             }
         }

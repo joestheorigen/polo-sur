@@ -27,6 +27,8 @@ public class Panel extends JPanel implements ActionListener {
     JButton detalles = new JButton(new ImageIcon("detalles.png"));
     JButton calentar = new JButton(new ImageIcon("calentar.png"));
     JButton caza = new JButton(new ImageIcon("caza.png"));
+    JButton terremoto = new JButton("Terremoto");
+    JButton guerra = new JButton("Guerra");
     JButton salir = new JButton(new ImageIcon("puerta.png"));
     polo_Sur polo = new polo_Sur();
     boolean calentado, cazado;
@@ -45,6 +47,8 @@ public class Panel extends JPanel implements ActionListener {
         detalles.addActionListener(this);
         calentar.addActionListener(this);
         caza.addActionListener(this);
+        terremoto.addActionListener(this);
+        guerra.addActionListener(this);
         salir.addActionListener(this);
 
         crear.setActionCommand("crear");
@@ -53,6 +57,8 @@ public class Panel extends JPanel implements ActionListener {
         detalles.setActionCommand("detalles");
         calentar.setActionCommand("calentar");
         caza.setActionCommand("cazar");
+        terremoto.setActionCommand("terremoto");
+        guerra.setActionCommand("guerra");
         salir.setActionCommand("salir");
         
         this.add(crear);
@@ -61,6 +67,8 @@ public class Panel extends JPanel implements ActionListener {
         this.add(detalles);
         this.add(calentar);
         this.add(caza);
+        this.add(terremoto);
+        this.add(guerra);
         this.add(salir);
 
         this.setVisible(true);
@@ -73,18 +81,24 @@ public class Panel extends JPanel implements ActionListener {
         ObjectInputStream file3 = new ObjectInputStream(new FileInputStream("dia.dat"));
         ObjectInputStream file4 = new ObjectInputStream(new FileInputStream("calentamiento global.dat"));
         ObjectInputStream file5 = new ObjectInputStream(new FileInputStream("caza furtiva.dat"));
+        ObjectInputStream file6 = new ObjectInputStream(new FileInputStream("terremoto.dat"));
+        ObjectInputStream file7 = new ObjectInputStream(new FileInputStream("guerra.dat"));
 
         polo.animales = (ArrayList<serVivo>) file1.readObject();
         polo.temperatura = file2.readDouble();
         polo.dia = file3.readInt();
         polo.calentado = file4.readBoolean();
         polo.cazado = file5.readBoolean();
+        polo.terremoto = file6.readBoolean();
+        polo.guerra = file7.readBoolean();
 
         file1.close();
         file2.close();
         file3.close();
         file4.close();
         file5.close();
+        file6.close();
+        file7.close();
     }
     
     @Override
@@ -129,7 +143,7 @@ public class Panel extends JPanel implements ActionListener {
                     aux.add("El dia es: " + polo.dia);
                     aux.add(" ");
                     aux.add("La temperatura es: " + polo.temperatura + " grados.");
-                    if (polo.calentado == true || polo.cazado == true) {
+                    if (polo.calentado == true || polo.cazado == true || polo.terremoto == true || polo.guerra == true) {
                         aux.add(" ");
                         aux.add("Estos son los catastrofes que han ocurrido");
                         if (polo.calentado == true) {
@@ -137,6 +151,12 @@ public class Panel extends JPanel implements ActionListener {
                         }
                         if (polo.cazado == true) {
                             aux.add("Aparecieron unos cazadores furtivos");
+                        }
+                        if (polo.terremoto == true) {
+                            aux.add("Ha ocurrido un terremoto");
+                        }
+                        if (polo.guerra == true) {
+                            aux.add("Ha habido una guerra entre esquimales");
                         }
                     } else {
                         aux.add(" ");
@@ -194,6 +214,29 @@ public class Panel extends JPanel implements ActionListener {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
                 break;
+            
+            case "terremoto":
+                if (polo != null) {
+                    polo.terremoto();
+                    JOptionPane.showMessageDialog(new JFrame(), "Ha ocurrido un terremoto");
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
+                }
+                break;
+            
+            case "guerra":
+                if (polo != null) {                    
+                    if(polo.contarRaza("esquimal")!=0){                         //si hay esquimales
+                        polo.guerra();                                          //hay guerra
+                        JOptionPane.showMessageDialog(new JFrame(), "Los esquimales han sufrido una guerra");   
+                    }
+                    else{                                                       //si no, no hay guerra
+                        JOptionPane.showMessageDialog(new JFrame(), "Sin esquimales no hay guerra, lo siento");
+                    }
+                } else {                                                        //si no se creo el polo se avisa
+                    JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
+                }
+                break;
 
             case "salir":
                 try {
@@ -202,18 +245,24 @@ public class Panel extends JPanel implements ActionListener {
                     ObjectOutputStream file3 = new ObjectOutputStream(new FileOutputStream("dia.dat"));
                     ObjectOutputStream file4 = new ObjectOutputStream(new FileOutputStream("calentamiento global.dat"));
                     ObjectOutputStream file5 = new ObjectOutputStream(new FileOutputStream("caza furtiva.dat"));
+                    ObjectOutputStream file6 = new ObjectOutputStream(new FileOutputStream("terremoto.dat"));
+                    ObjectOutputStream file7 = new ObjectOutputStream(new FileOutputStream("guerra.dat"));
 
                     file1.writeObject(polo.animales);
                     file2.writeDouble(polo.temperatura);
                     file3.writeInt(polo.dia);
                     file4.writeBoolean(polo.calentado);
                     file5.writeBoolean(polo.cazado);
+                    file6.writeBoolean(polo.terremoto);
+                    file7.writeBoolean(polo.guerra);
 
                     file1.close();
                     file2.close();
                     file3.close();
                     file4.close();
                     file5.close();
+                    file6.close();
+                    file7.close();
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(new JFrame(), "Algun fallo hubo al guardar");
                 }

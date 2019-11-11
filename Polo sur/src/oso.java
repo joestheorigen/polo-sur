@@ -21,15 +21,15 @@ public class oso extends serVivo {
         float i;
         Random r = new Random();
         i = r.nextFloat();
-        if (i <= 0.16) {
+        if (i <= 0.80) {
             return 10;
-        } else if (i <= 0.33) {
+        } else if (i <= 0.85) {
             return 11;
-        } else if (i <= 0.5) {
+        } else if (i <= 0.90) {
             return 12;
-        } else if (i <= 0.67) {
+        } else if (i <= 0.92) {
             return 13;
-        } else if (i <= 0.83) {
+        } else if (i <= 0.95) {
             return 14;
         } else {
             return 15;
