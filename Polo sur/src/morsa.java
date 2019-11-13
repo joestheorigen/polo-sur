@@ -21,9 +21,9 @@ public class morsa extends serVivo {
         float i;
         Random r = new Random();
         i = r.nextFloat();
-        if (i <= 0.80) {
+        if (i <= 0.33) {
             return 0;
-        } else if (i <= 0.95) {
+        } else if (i <= 0.66) {
             return 1;
         } else {
             return 2;

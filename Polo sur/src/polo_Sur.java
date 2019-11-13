@@ -38,7 +38,6 @@ public class polo_Sur {
 
     /**
      *
-     * @return
      */
     public void diaAdia() {
         dia++;
@@ -59,7 +58,6 @@ public class polo_Sur {
 
     /**
      *
-     * @return
      */
     public void pasar10dias() {
         for (int i = 0; i < 10; i++) {
@@ -97,7 +95,7 @@ public class polo_Sur {
      */
     public void crearOsos() {
         int n, i, masa;                                                    //en n ira el numero de oso que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (27 - 22 + 1) + 22);          //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (28 - 22 + 1) + 22);          //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
             masa = (int) Math.floor(Math.random() * (54 - 40 + 1) + 40);
             animales.add(new oso(dia, masa, (float) (153.0 / 1000.0), (float) (95.0 / 1000.0)));
@@ -109,7 +107,7 @@ public class polo_Sur {
      */
     public void crearMorsas() {
         int n, i, masa;                                                    //en n ira el numero de morsas que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (47 - 42 + 1) + 42);          //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (48 - 42 + 1) + 42);          //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
             masa = (int) Math.floor(Math.random() * (41 - 30 + 1) + 30);
             animales.add(new morsa(dia, masa, (float) (98.0 / 1000.0), (float) (95.0 / 1000.0)));
@@ -121,7 +119,7 @@ public class polo_Sur {
      */
     public void crearFocas() {
         int n, i, masa;                                                    //en n ira el numero de focas que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (289 - 260 + 1) + 260);       //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (290 - 260 + 1) + 260);       //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
             masa = (int) Math.floor(Math.random() * (31 - 25 + 1) + 25);
             animales.add(new foca(dia, masa, (float) (100.0 / 1000.0), (float) (90.0 / 1000.0)));
@@ -135,7 +133,7 @@ public class polo_Sur {
         Random r = new Random();
         float aux;                                                         //en aux tendremos el numero aleatorio para elegir el tipo de pez
         int n, i, masa;                                                    //en n ira el numero de peces que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (7999 - 7000 + 1) + 7000);    //i es solo para explorar el for
+        n = (int) Math.floor(Math.random() * (8000 - 7000 + 1) + 7000);    //i es solo para explorar el for
         for (i = 0; i <= n; i++) {                                         //metemos el numero de esquimales iniciales en n
             aux = r.nextFloat();
             masa = (int) Math.floor(Math.random() * (69 - 55 + 1) + 55);
@@ -154,7 +152,7 @@ public class polo_Sur {
      */
     public void crearkyp() {
         int n;
-        n = (int) Math.floor(Math.random() * (74 - 65 + 1) + 65);
+        n = (int) Math.floor(Math.random() * (75 - 65 + 1) + 65);
         animales.add(new kyp(dia, 0, 0, 0, n));
     }
 
@@ -182,6 +180,9 @@ public class polo_Sur {
         }
     }
 
+    /**
+     *
+     */
     public void terremoto() {
         Random r = new Random();
         terremoto = true;
@@ -197,12 +198,13 @@ public class polo_Sur {
                 animales.remove(i);
             } else if (i instanceof esquimal && r.nextFloat() <= 0.32) {
                 animales.remove(i);
-            } else if (i instanceof kyp && r.nextFloat() <= 0.70) {
-                animales.remove(i);
             }
         }
     }
 
+    /**
+     *
+     */
     public void guerra() {
         Random r = new Random();
         guerra = true;
@@ -546,6 +548,11 @@ public class polo_Sur {
         return j;
     }
 
+    /**
+     *
+     * @param tipo
+     * @return
+     */
     public int contarRazaPeces(String tipo) {
         int j = 0;
         for (serVivo i : animales) {
@@ -558,6 +565,11 @@ public class polo_Sur {
         return j;
     }
 
+    /**
+     *
+     * @param tipo
+     * @return
+     */
     public ArrayList<String> toStringPeces(String tipo) {
         ArrayList<String> f = new ArrayList<String>();
         for (serVivo i : animales) {

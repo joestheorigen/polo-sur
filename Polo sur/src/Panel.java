@@ -99,6 +99,10 @@ public class Panel extends JPanel implements ActionListener {
             case "dia":
                 if (polo != null) {
                     polo.diaAdia();
+                    if(polo.mundoMuerto()){
+                        JOptionPane.showMessageDialog(new JFrame(), "Te creo otro polo");
+                        polo = new polo_Sur();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
@@ -107,6 +111,10 @@ public class Panel extends JPanel implements ActionListener {
             case "10 dias":
                 if (polo != null) {
                     polo.pasar10dias();
+                    if(polo.mundoMuerto()){
+                        JOptionPane.showMessageDialog(new JFrame(), "Te creo otro polo");
+                        polo = new polo_Sur();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
