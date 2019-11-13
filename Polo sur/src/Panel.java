@@ -1,6 +1,4 @@
 
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,21 +18,21 @@ import javax.swing.JPanel;
 
 public class Panel extends JPanel implements ActionListener {
 
-    JButton crear = new JButton(new ImageIcon("crearpolo.png"));
-    JButton pasarDia = new JButton(new ImageIcon("pasardia.png"));
-    JButton pasar10Dias = new JButton(new ImageIcon("pasar10dias.png"));
-    JButton detalles = new JButton(new ImageIcon("detalles.png"));
-    JButton calentar = new JButton(new ImageIcon("calentar.png"));
-    JButton caza = new JButton(new ImageIcon("caza.png"));
-    JButton terremoto = new JButton("Terremoto");
-    JButton guerra = new JButton("Guerra");
-    JButton salir = new JButton(new ImageIcon("puerta.png"));
+    JButton crear = new JButton(new ImageIcon("Imagenes/crearpolo.png"));
+    JButton pasarDia = new JButton(new ImageIcon("Imagenes/pasardia.png"));
+    JButton pasar10Dias = new JButton(new ImageIcon("Imagenes/pasar10dias.png"));
+    JButton detalles = new JButton(new ImageIcon("Imagenes/detalles.png"));
+    JButton calentar = new JButton(new ImageIcon("Imagenes/calentar.png"));
+    JButton caza = new JButton(new ImageIcon("Imagenes/caza.png"));
+    JButton terremoto = new JButton(new ImageIcon("Imagenes/terremoto.png"));
+    JButton guerra = new JButton(new ImageIcon("Imagenes/guerra.png"));
+    JButton salir = new JButton(new ImageIcon("Imagenes/puerta.png"));
     polo_Sur polo = new polo_Sur();
 
     public Panel() throws IOException, ClassNotFoundException {
 
-        this.setLayout(new GridLayout(4,3));
-        
+        this.setLayout(new GridLayout(4, 3));
+
         cargarDatos();
 
         crear.addActionListener(this);
@@ -57,7 +54,7 @@ public class Panel extends JPanel implements ActionListener {
         terremoto.setActionCommand("terremoto");
         guerra.setActionCommand("guerra");
         salir.setActionCommand("salir");
-        
+
         this.add(crear);
         this.add(pasarDia);
         this.add(pasar10Dias);
@@ -72,32 +69,25 @@ public class Panel extends JPanel implements ActionListener {
         this.setSize(1000, 200);
     }
 
-    public void cargarDatos() throws FileNotFoundException, IOException, ClassNotFoundException{
-        ObjectInputStream file1 = new ObjectInputStream(new FileInputStream("animales.dat"));
-        ObjectInputStream file2 = new ObjectInputStream(new FileInputStream("temperatura.dat"));
-        ObjectInputStream file3 = new ObjectInputStream(new FileInputStream("dia.dat"));
-        ObjectInputStream file4 = new ObjectInputStream(new FileInputStream("calentamiento global.dat"));
-        ObjectInputStream file5 = new ObjectInputStream(new FileInputStream("caza furtiva.dat"));
-        ObjectInputStream file6 = new ObjectInputStream(new FileInputStream("terremoto.dat"));
-        ObjectInputStream file7 = new ObjectInputStream(new FileInputStream("guerra.dat"));
+    public void cargarDatos() throws FileNotFoundException, IOException, ClassNotFoundException {
+        try {
+            lista l = new lista(polo);
+            ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("Polo.bin"));
+            l = (lista) entrada.readObject();
+            entrada.close();
+            polo.animales = l.animales;
+            polo.calentado = l.calentado;
+            polo.cazado = l.cazado;
+            polo.dia = l.dia;
+            polo.guerra = l.guerra;
+            polo.temperatura = l.temperatura;
+            polo.terremoto = l.terremoto;
 
-        polo.animales = (ArrayList<serVivo>) file1.readObject();
-        polo.temperatura = file2.readDouble();
-        polo.dia = file3.readInt();
-        polo.calentado = file4.readBoolean();
-        polo.cazado = file5.readBoolean();
-        polo.terremoto = file6.readBoolean();
-        polo.guerra = file7.readBoolean();
-
-        file1.close();
-        file2.close();
-        file3.close();
-        file4.close();
-        file5.close();
-        file6.close();
-        file7.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new JFrame(), "Algun fallo hubo al cargar");
+        }
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -108,11 +98,7 @@ public class Panel extends JPanel implements ActionListener {
 
             case "dia":
                 if (polo != null) {
-                    if (!polo.diaAdia()) {
-                        JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
-                    } else {
-                        System.exit(0);
-                    }
+                    polo.diaAdia();
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
@@ -120,11 +106,7 @@ public class Panel extends JPanel implements ActionListener {
 
             case "10 dias":
                 if (polo != null) {
-                    if (!polo.pasar10dias()) {
-                        JOptionPane.showMessageDialog(new JFrame(), "dia " + polo.dia);
-                    } else {
-                        System.exit(0);
-                    }
+                    polo.pasar10dias();
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
@@ -211,7 +193,7 @@ public class Panel extends JPanel implements ActionListener {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
                 break;
-            
+
             case "terremoto":
                 if (polo != null) {
                     polo.terremoto();
@@ -220,55 +202,31 @@ public class Panel extends JPanel implements ActionListener {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
                 break;
-            
+
             case "guerra":
-                if (polo != null) {                    
-                    if(polo.contarRaza("esquimal")>1){                         
-                        polo.guerra();                                          
-                        JOptionPane.showMessageDialog(new JFrame(), "Los esquimales han sufrido una guerra");   
-                    }
-                    else{                                                       
+                if (polo != null) {
+                    if (polo.contarRaza("esquimal") > 1) {
+                        polo.guerra();
+                        JOptionPane.showMessageDialog(new JFrame(), "Los esquimales han sufrido una guerra");
+                    } else {
                         JOptionPane.showMessageDialog(new JFrame(), "No hay esquimales para una guerra");
                     }
-                } else {                                                        
+                } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Aun no se creo el polo");
                 }
                 break;
 
             case "salir":
                 try {
-                    ObjectOutputStream file1 = new ObjectOutputStream(new FileOutputStream("animales.dat"));
-                    ObjectOutputStream file2 = new ObjectOutputStream(new FileOutputStream("temperatura.dat"));
-                    ObjectOutputStream file3 = new ObjectOutputStream(new FileOutputStream("dia.dat"));
-                    ObjectOutputStream file4 = new ObjectOutputStream(new FileOutputStream("calentamiento global.dat"));
-                    ObjectOutputStream file5 = new ObjectOutputStream(new FileOutputStream("caza furtiva.dat"));
-                    ObjectOutputStream file6 = new ObjectOutputStream(new FileOutputStream("terremoto.dat"));
-                    ObjectOutputStream file7 = new ObjectOutputStream(new FileOutputStream("guerra.dat"));
-
-                    file1.writeObject(polo.animales);
-                    file2.writeDouble(polo.temperatura);
-                    file3.writeInt(polo.dia);
-                    file4.writeBoolean(polo.calentado);
-                    file5.writeBoolean(polo.cazado);
-                    file6.writeBoolean(polo.terremoto);
-                    file7.writeBoolean(polo.guerra);
-
-                    file1.close();
-                    file2.close();
-                    file3.close();
-                    file4.close();
-                    file5.close();
-                    file6.close();
-                    file7.close();
-                } catch (IOException ex) {
+                    lista l = new lista(polo);
+                    ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream("Polo.bin"));
+                    salida.writeObject(l);
+                    salida.close();
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(new JFrame(), "Algun fallo hubo al guardar");
                 }
                 System.exit(0);
                 break;
         }
-    }
-    
-    public void paintComponent(Graphics g) {
-        g.drawImage(new ImageIcon("indice.png").getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
     }
 }

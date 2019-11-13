@@ -40,7 +40,7 @@ public class polo_Sur {
      *
      * @return
      */
-    public boolean diaAdia() {
+    public void diaAdia() {
         dia++;
         cazado = false;
         calentado = false;
@@ -52,16 +52,16 @@ public class polo_Sur {
         muerteInesperada();
         if (mundoMuerto()) {
             JOptionPane.showMessageDialog(new JFrame(), "El mundo esta muerto en el dia " + dia);
-            return true;
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "dia " + dia);
         }
-        return false;
     }
 
     /**
      *
      * @return
      */
-    public boolean pasar10dias() {
+    public void pasar10dias() {
         for (int i = 0; i < 10; i++) {
             dia++;
             cazado = false;
@@ -74,10 +74,10 @@ public class polo_Sur {
             muerteInesperada();
             if (mundoMuerto()) {
                 JOptionPane.showMessageDialog(new JFrame(), "El mundo esta muerto en el dia " + dia);
-                return true;
+                return;
             }
         }
-        return false;
+        JOptionPane.showMessageDialog(new JFrame(), "dia " + dia);
     }
 
     /**
@@ -153,9 +153,9 @@ public class polo_Sur {
      *
      */
     public void crearkyp() {
-        int n;                                                  //en n ira el numero de kyp que abra al principio, i es solo para explorar el for
-        n = (int) Math.floor(Math.random() * (74 - 65 + 1) + 65);          //i es solo para explorar el for
-        animales.add(new kyp(dia, 0, 0, 0, n));           //metemos el numero de esquimales iniciales en n
+        int n;
+        n = (int) Math.floor(Math.random() * (74 - 65 + 1) + 65);
+        animales.add(new kyp(dia, 0, 0, 0, n));
     }
 
     /**
@@ -491,7 +491,7 @@ public class polo_Sur {
         ArrayList<serVivo> aux = (ArrayList<serVivo>) animales.clone();
         for (serVivo i : aux) {
             if (i.raza.equals("kyp")) {
-                ((kyp) i).num = ((kyp) i).num - 1000000;
+                ((kyp) i).num = ((kyp) i).num - 1;
                 if (((kyp) i).num == 0) {
                     animales.remove(i);
                 }
